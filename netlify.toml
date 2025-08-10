@@ -1,5 +1,4 @@
 [build]
-  base = "frontendtabib"
   publish = "dist"
   command = "npm run build"
 
