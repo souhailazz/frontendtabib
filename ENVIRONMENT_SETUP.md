@@ -8,7 +8,7 @@ Create a file named `.env.development` in the `frontend/` directory:
 
 ```env
 # Development Environment Variables
-VITE_API_BASE_URL=http://localhost:8080
+VITE_API_BASE_URL=https://tabib-c9pp.onrender.com/
 VITE_FRONTEND_URL=http://localhost:5173
 ```
 
@@ -53,7 +53,7 @@ Don't forget to update your backend CORS configuration to allow your production 
 
 ## Development vs Production
 
-- **Development**: Uses `http://localhost:8080` for API and `http://localhost:5173` for frontend
+- **Development**: Uses `https://tabib-c9pp.onrender.com/` for API and `http://localhost:5173` for frontend
 - **Production**: Uses `https://tabib-c9pp.onrender.com` for API and your deployed frontend URL
 
 The configuration automatically switches based on your build mode (`npm run dev` vs `npm run build`). 

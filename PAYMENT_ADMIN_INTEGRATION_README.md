@@ -122,10 +122,10 @@ const [payments, setPayments] = useState([]);
 const fetchAllData = async () => {
   // ... existing code ...
   const [patientsRes, doctorsRes, consultationsRes, paymentsRes] = await Promise.all([
-    fetch('http://localhost:8080/api/admin/patients'),
-    fetch('http://localhost:8080/api/admin/doctors'),
-    fetch('http://localhost:8080/api/admin/consultations'),
-    fetch('http://localhost:8080/api/admin/payments') // New
+    fetch('https://tabib-c9pp.onrender.com//api/admin/patients'),
+    fetch('https://tabib-c9pp.onrender.com//api/admin/doctors'),
+    fetch('https://tabib-c9pp.onrender.com//api/admin/consultations'),
+    fetch('https://tabib-c9pp.onrender.com//api/admin/payments') // New
   ]);
   // ... set payments data ...
 };

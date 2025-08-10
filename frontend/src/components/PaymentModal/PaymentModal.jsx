@@ -62,7 +62,7 @@ const CreditCardForm = ({ amount, onPaymentSuccess, onPaymentError, bookingData 
 
     try {
       // Create payment intent
-      const response = await fetch("http://localhost:8080/api/payments/create-payment-intent", {
+      const response = await fetch("https://tabib-c9pp.onrender.com//api/payments/create-payment-intent", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -99,7 +99,7 @@ const CreditCardForm = ({ amount, onPaymentSuccess, onPaymentError, bookingData 
 
       if (paymentIntent.status === "succeeded") {
         // Confirm payment with backend
-        const confirmResponse = await fetch(`http://localhost:8080/api/payments/confirm-payment?paymentIntentId=${paymentIntent.id}`, {
+        const confirmResponse = await fetch(`https://tabib-c9pp.onrender.com//api/payments/confirm-payment?paymentIntentId=${paymentIntent.id}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -197,7 +197,7 @@ const MobileMoneyForm = ({ amount, onPaymentSuccess, onPaymentError, bookingData
     setError("");
 
     try {
-      const response = await fetch("http://localhost:8080/api/payments/mobile-money", {
+      const response = await fetch("https://tabib-c9pp.onrender.com//api/payments/mobile-money", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -297,7 +297,7 @@ const PayPalForm = ({ amount, onPaymentSuccess, onPaymentError, bookingData }) =
     try {
       // In a real implementation, you would integrate with PayPal SDK
       // For now, we'll simulate the payment
-      const response = await fetch("http://localhost:8080/api/payments/paypal", {
+      const response = await fetch("https://tabib-c9pp.onrender.com//api/payments/paypal", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
