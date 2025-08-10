@@ -53,15 +53,39 @@ const handleModalConfirm = async (bookingData) => {
 
 
   useEffect(() => {
-    const fetchDoctors = async (retryCount = 0) => {
+    const fetchDoctors = async () => {
       if (!specialty) {
-        setError(t('responseSearch.error.noSpecialty'));
+        setError('Please select a specialty');
         setLoading(false);
         return;
       }
 
+      setLoading(true);
+      setError(null);
+
       try {
-        // Construct URL with search parameters
+        // Simple test URL without parameters first
+        const testUrl = 'https://tabib-c9pp.onrender.com/api/docteurs/test';
+        console.log('Testing connection to:', testUrl);
+        
+        // First try a simple fetch to test the connection
+        const testResponse = await fetch(testUrl, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+          },
+          mode: 'cors'
+        });
+
+        console.log('Test response status:', testResponse.status);
+        
+        if (!testResponse.ok) {
+          const errorText = await testResponse.text();
+          console.error('Test request failed:', errorText);
+          throw new Error(`Server responded with status: ${testResponse.status}`);
+        }
+
+        // If test passes, make the actual request
         const params = new URLSearchParams();
         if (specialty) params.append('specialite', specialty);
         if (city) params.append('city', city);
@@ -70,88 +94,43 @@ const handleModalConfirm = async (bookingData) => {
         if (reason) params.append('reason', reason);
 
         const apiUrl = `https://tabib-c9pp.onrender.com/api/docteurs/search?${params.toString()}`;
-        console.log('Fetching doctors from:', apiUrl);
-
-        let response;
-        try {
-          response = await fetch(apiUrl, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            credentials: 'include',
-            mode: 'cors'
-          });
-        } catch (fetchError) {
-          console.error('Network fetch error:', fetchError);
-          throw new Error(t('responseSearch.error.networkError', { 
-            details: fetchError.message || 'Could not connect to the server'
-          }));
-        }
+        
+        // Log the full API URL for debugging
+        console.log('Full API URL:', apiUrl);
+        console.log('You can test this URL directly in your browser or Postman');
+        
+        const response = await fetch(apiUrl, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+          },
+          mode: 'cors',
+          credentials: 'same-origin' // Try 'same-origin' instead of 'include'
+        });
 
         console.log('Response status:', response.status);
         
         if (!response.ok) {
-          let errorData;
-          try {
-            errorData = await response.text();
-            console.error('API Error Response:', errorData);
-            // Try to parse as JSON if possible
-            try {
-              errorData = JSON.parse(errorData);
-            } catch (e) {
-              // If not JSON, keep as text
-            }
-          } catch (e) {
-            console.error('Error reading error response:', e);
-            errorData = 'Could not read error response';
-          }
-          
-          const errorMessage = errorData?.message || 
-                             errorData?.error || 
-                             errorData || 
-                             `HTTP ${response.status} ${response.statusText}`;
-          
-          throw new Error(t('responseSearch.error.httpError', { 
-            status: response.status,
-            message: errorMessage
-          }));
+          const errorText = await response.text();
+          console.error('API Error:', errorText);
+          throw new Error(`Error ${response.status}: ${errorText || 'Unknown error'}`);
         }
 
-        let data;
-        try {
-          data = await response.json();
-          console.log('API Response:', data);
-        } catch (parseError) {
-          console.error('Error parsing JSON response:', parseError);
-          throw new Error(t('responseSearch.error.invalidResponse'));
-        }
+        const data = await response.json();
         
         if (!Array.isArray(data)) {
-          console.error('Unexpected response format:', data);
-          throw new Error(t('responseSearch.error.invalidResponse'));
+          throw new Error('Invalid response format from server');
         }
 
         setDoctors(data);
-        setError(null);
-      } catch (err) {
-        console.error('Error in fetchDoctors:', {
-          error: err,
-          message: err.message,
-          stack: err.stack,
-          retryCount
+      } catch (error) {
+        console.error('Failed to fetch doctors:', {
+          error: error.toString(),
+          message: error.message,
+          name: error.name,
+          stack: error.stack
         });
-        
-        // Retry logic (max 2 retries with exponential backoff)
-        if (retryCount < 2) {
-          const delay = Math.pow(2, retryCount) * 1000;
-          console.log(`Retrying in ${delay}ms... (Attempt ${retryCount + 1}/2)`);
-          await new Promise(resolve => setTimeout(resolve, delay));
-          return fetchDoctors(retryCount + 1);
-        }
-        
-        setError(err.message || t('responseSearch.error.networkError'));
+        setError(`Could not load doctors: ${error.message}`);
         setDoctors([]);
       } finally {
         setLoading(false);
@@ -159,12 +138,7 @@ const handleModalConfirm = async (bookingData) => {
     };
 
     fetchDoctors();
-    
-    // Cleanup function
-    return () => {
-      // Add any cleanup if needed
-    };
-  }, [specialty, city, date, time, reason, t]);
+  }, [specialty, city, date, time, reason]);
 
   const formatSearchCriteria = () => {
     let criteria = specialty || t('responseSearch.allSpecialties');
