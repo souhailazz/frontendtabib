@@ -29,9 +29,9 @@ const Dashboard = () => {
       }
 
       const [doctorRes, consultationsRes, ordonnancesRes] = await Promise.all([
-        fetch(`http://localhost:8080/api/docteurs/${userId}`),
-        fetch(`http://localhost:8080/api/consultations/doctor/${userId}`),
-        fetch(`http://localhost:8080/api/ordonnances/doctor/${userId}`)
+        fetch(`https://tabib-c9pp.onrender.com/api/docteurs/${userId}`),
+        fetch(`https://tabib-c9pp.onrender.com/api/consultations/doctor/${userId}`),
+        fetch(`https://tabib-c9pp.onrender.com/api/ordonnances/doctor/${userId}`)
       ]);
 
       if (!doctorRes.ok) {

@@ -56,7 +56,7 @@ const MyConsultation = () => {
  
     setLoadingOrdonnance(true);
     try {
-      const response = await axios.get(`http://localhost:8080/api/ordonnances/consultation/${consultationId}`);
+      const response = await axios.get(`https://tabib-c9pp.onrender.com/api/ordonnances/consultation/${consultationId}`);
       setLoadingOrdonnance(false);
       return response.data;
     } catch (error) {
@@ -75,8 +75,8 @@ const MyConsultation = () => {
     }
  
     const url = userType === 'patient'
-      ? `http://localhost:8080/api/consultations/patient/${userId}`
-      : `http://localhost:8080/api/consultations/doctor/${userId}`;
+      ? `https://tabib-c9pp.onrender.com/api/consultations/patient/${userId}`
+      : `https://tabib-c9pp.onrender.com/api/consultations/doctor/${userId}`;
  
     try {
       const response = await axios.get(`${url}?t=${Date.now()}`, { 
@@ -147,7 +147,7 @@ const MyConsultation = () => {
  
       if (patientId && doctorId) {
         axios
-          .get(`http://localhost:8080/api/messages/between?docteurId=${doctorId}&patientId=${patientId}`)
+          .get(`https://tabib-c9pp.onrender.com/api/messages/between?docteurId=${doctorId}&patientId=${patientId}`)
           .then((res) => setMessages(res.data))
           .catch((err) => {
             console.error('Error loading messages:', err);
@@ -262,7 +262,7 @@ const MyConsultation = () => {
           dateConsultation: new Date().toISOString()
         };
  
-        const res = await axios.post('http://localhost:8080/api/consultations', newConsultation);
+        const res = await axios.post('https://tabib-c9pp.onrender.com/api/consultations', newConsultation);
         consultation = res.data;
         setConsultations((prev) => [...prev, consultation]);
         setSelectedConsultation(consultation);
@@ -313,7 +313,7 @@ const MyConsultation = () => {
             ordonnanceId = ordonnance.id;
           } else {
             // Create new ordonnance only if one doesn't exist
-            const ordonnanceResponse = await axios.post(`http://localhost:8080/api/ordonnances`, ordonnancePayload);
+            const ordonnanceResponse = await axios.post(`https://tabib-c9pp.onrender.com/api/ordonnances`, ordonnancePayload);
             console.log('Ordonnance creation response:', ordonnanceResponse.data);
  
             if (!ordonnanceResponse.data || !ordonnanceResponse.data.id) {
@@ -357,7 +357,7 @@ const MyConsultation = () => {
  
       console.log('Message DTO:', dto);
  
-      const res = await axios.post('http://localhost:8080/api/messages', dto);
+      const res = await axios.post('https://tabib-c9pp.onrender.com/api/messages', dto);
       setMessages((prev) => [...prev, res.data]);
       setMessage('');
     } catch (err) {
@@ -407,7 +407,7 @@ const MyConsultation = () => {
   const handleEditOrdonnance = async (ordonnanceId, content) => {
     try {
       setIsEditingOrdonnance(true);
-      const response = await axios.put(`http://localhost:8080/api/ordonnances/${ordonnanceId}`, {
+      const response = await axios.put(`https://tabib-c9pp.onrender.com/api/ordonnances/${ordonnanceId}`, {
         contenu: content,
         status: 'active'
       });
@@ -450,7 +450,7 @@ const MyConsultation = () => {
  
   const handleUpdateConsultationStatus = async (consultationId, newStatus) => {
     try {
-      const response = await axios.put(`http://localhost:8080/api/consultations/${consultationId}/status?status=${newStatus}`);
+      const response = await axios.put(`https://tabib-c9pp.onrender.com/api/consultations/${consultationId}/status?status=${newStatus}`);
       if (response.data) {
         // Immediately fetch fresh consultation data to ensure real-time updates
         await fetchConsultations();

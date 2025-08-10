@@ -164,10 +164,10 @@ const Admin = () => {
     try {
       setLoading(true);
       const [patientsRes, doctorsRes, consultationsRes, paymentsRes] = await Promise.all([
-        fetch('http://localhost:8080/api/admin/patients'),
-        fetch('http://localhost:8080/api/admin/doctors'),
-        fetch('http://localhost:8080/api/admin/consultations'),
-        fetch('http://localhost:8080/api/admin/payments')
+        fetch('https://tabib-c9pp.onrender.com/api/admin/patients'),
+        fetch('https://tabib-c9pp.onrender.com/api/admin/doctors'),
+        fetch('https://tabib-c9pp.onrender.com/api/admin/consultations'),
+        fetch('https://tabib-c9pp.onrender.com/api/admin/payments')
       ]);
 
       if (!patientsRes.ok || !doctorsRes.ok || !consultationsRes.ok || !paymentsRes.ok) {
@@ -261,7 +261,7 @@ const Admin = () => {
         };
       }
       
-      const response = await fetch(`http://localhost:8080${endpoint}`, {
+      const response = await fetch(`https://tabib-c9pp.onrender.com${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dataToSend)
@@ -285,7 +285,7 @@ const Admin = () => {
                       editMode === 'consultation' ? `/api/admin/consultations/${selectedItem.id}` :
                       `/api/admin/payments/${selectedItem.paymentId}`;
       
-      const response = await fetch(`http://localhost:8080${endpoint}`, {
+      const response = await fetch(`https://tabib-c9pp.onrender.com${endpoint}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -309,7 +309,7 @@ const Admin = () => {
                       editMode === 'consultation' ? `/api/admin/consultations/${selectedItem.id}` :
                       `/api/admin/payments/${selectedItem.paymentId}`;
       
-      const response = await fetch(`http://localhost:8080${endpoint}`, {
+      const response = await fetch(`https://tabib-c9pp.onrender.com${endpoint}`, {
         method: 'DELETE'
       });
 

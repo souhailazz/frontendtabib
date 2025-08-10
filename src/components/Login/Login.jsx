@@ -35,8 +35,8 @@ function LoginForm() {
     try {
       const url =
         userType === "patient"
-          ? "http://localhost:8080/api/patients/login"
-          : "http://localhost:8080/api/docteurs/login"
+          ? "https://tabib-c9pp.onrender.com/api/patients/login"
+          : "https://tabib-c9pp.onrender.com/api/docteurs/login"
 
       const payload =
         userType === "patient"
