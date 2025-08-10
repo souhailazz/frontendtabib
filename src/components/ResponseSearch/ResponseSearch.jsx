@@ -53,7 +53,7 @@ const handleModalConfirm = async (bookingData) => {
 
 
   useEffect(() => {
-    const fetchDoctors = async () => {
+    const fetchDoctors = async (retryCount = 0) => {
       if (!specialty) {
         setError(t('responseSearch.error.noSpecialty'));
         setLoading(false);
@@ -61,27 +61,48 @@ const handleModalConfirm = async (bookingData) => {
       }
 
       try {
-        const apiUrl = `https://tabib-c9pp.onrender.com/api/docteurs/search?${searchParams.toString()}`;
-        const response = await fetch(apiUrl, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          }
-        });
+        // Construct URL with search parameters
+        const params = new URLSearchParams();
+        if (specialty) params.append('specialite', specialty);
+        if (city) params.append('city', city);
+        if (date) params.append('date', date);
+        if (time) params.append('time', time);
+        if (reason) params.append('reason', reason);
 
-        if (response.status === 204) {
-          setDoctors([]);
-          setError(null);
-          return;
-        }
+        const apiUrl = `https://tabib-c9pp.onrender.com/api/docteurs/search?${params.toString()}`;
+        console.log('Fetching doctors from:', apiUrl);
+
+        const response = await fetch(apiUrl, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          credentials: 'include', // Important for cookies
+          mode: 'cors' // Enable CORS mode
+        });
 
         if (!response.ok) {
           const errorData = await response.text();
-          throw new Error(`${t('responseSearch.error.httpError')} ${response.status}: ${errorData}`);
+          console.error('API Error:', {
+            status: response.status,
+            statusText: response.statusText,
+            error: errorData,
+          });
+          
+          if (response.status === 401) {
+            // Handle unauthorized (e.g., redirect to login)
+            throw new Error(t('responseSearch.error.unauthorized'));
+          }
+          
+          throw new Error(t('responseSearch.error.httpError', { 
+            status: response.status,
+            message: errorData || response.statusText
+          }));
         }
 
         const data = await response.json();
+        
         if (!Array.isArray(data)) {
           throw new Error(t('responseSearch.error.invalidResponse'));
         }
@@ -89,8 +110,17 @@ const handleModalConfirm = async (bookingData) => {
         setDoctors(data);
         setError(null);
       } catch (err) {
-        console.error("Fetch error:", err);
-        setError(err.message);
+        console.error('Error fetching doctors:', err);
+        
+        // Retry logic (max 2 retries with exponential backoff)
+        if (retryCount < 2) {
+          const delay = Math.pow(2, retryCount) * 1000;
+          console.log(`Retrying in ${delay}ms... (Attempt ${retryCount + 1}/2)`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return fetchDoctors(retryCount + 1);
+        }
+        
+        setError(t('responseSearch.error.networkError'));
         setDoctors([]);
       } finally {
         setLoading(false);
@@ -98,7 +128,12 @@ const handleModalConfirm = async (bookingData) => {
     };
 
     fetchDoctors();
-  }, [searchParams, specialty, t]);
+    
+    // Cleanup function
+    return () => {
+      // Add any cleanup if needed
+    };
+  }, [specialty, city, date, time, reason, t]);
 
   const formatSearchCriteria = () => {
     let criteria = specialty || t('responseSearch.allSpecialties');
