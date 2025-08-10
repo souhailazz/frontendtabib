@@ -1,0 +1,174 @@
+.consultation-calendar {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  height: 100%;
+}
+
+.calendar-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+.calendar-controls-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.calendar-controls {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.view-select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background-color: white;
+  color: #374151;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1;
+}
+
+.jump-date-input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background-color: white;
+  color: #374151;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1;
+}
+
+.view-select:hover,
+.jump-date-input:hover {
+  border-color: #d1d5db;
+}
+
+.view-select:focus,
+.jump-date-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.calendar-container {
+  height: calc(100vh - 200px);
+  min-height: 500px;
+}
+
+/* Custom event styles */
+.custom-event {
+  padding: 4px 8px;
+  font-size: 0.875rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.event-title {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.event-status {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.event-time {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* Override react-big-calendar styles */
+.rbc-calendar {
+  font-family: inherit;
+}
+
+.rbc-header {
+  padding: 0.5rem;
+  font-weight: 600;
+  color: #374151;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.rbc-today {
+  background-color: #f0f9ff;
+}
+
+.rbc-event {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+}
+
+.rbc-event.rbc-selected {
+  background-color: transparent;
+}
+
+.rbc-event:focus {
+  outline: none;
+}
+
+.rbc-toolbar {
+  margin-bottom: 1.5rem;
+}
+
+.rbc-toolbar button {
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background-color: white;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.rbc-toolbar button:hover {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.rbc-toolbar button.rbc-active {
+  background-color: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.rbc-toolbar button.rbc-active:hover {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .consultation-calendar {
+    padding: 1rem;
+  }
+
+  .calendar-controls {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .calendar-container {
+    height: calc(100vh - 250px);
+  }
+}

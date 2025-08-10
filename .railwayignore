@@ -1,0 +1,30 @@
+# Frontend files (not needed for backend deployment)
+frontend/
+node_modules/
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Docker files (not needed for Railway)
+Dockerfile
+docker-compose.yml
+
+# Environment files (Railway will provide these)
+.env
+.env.local
+.env.production 

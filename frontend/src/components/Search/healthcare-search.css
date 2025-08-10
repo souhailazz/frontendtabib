@@ -1,0 +1,328 @@
+/* Healthcare Search Styles */
+.healthcare-container {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #333;
+  background-color: #fff;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 100px; /* Space for footer */
+}
+
+/* Page Background */
+.page-background {
+  background: #f4fbfa;
+  min-height: 100vh;
+  padding: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Search Card */
+.search-card {
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px 0 rgba(34, 197, 94, 0.08), 0 1.5px 4px 0 rgba(0,0,0,0.04);
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  width: 100%;
+  max-width: 32rem;
+}
+
+/* Search Header */
+.search-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.search-icon {
+  color: #10b981;
+  margin-bottom: 0.5rem;
+}
+
+.search-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.25rem;
+  text-align: center;
+}
+
+.search-subtitle {
+  color: #6b7280;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+/* Search Form */
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.select-input {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background: #f9fafb;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+.select-input:focus {
+  border-color: #10b981;
+  background-color: #fff;
+}
+
+/* Search Button */
+.search-button {
+  background: #10b981;
+  color: #fff;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.875rem 1rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s ease;
+  width: 100%;
+}
+
+.search-button:hover {
+  background-color: #059669;
+}
+
+/* Error Message */
+.error-message {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  text-align: center;
+  border: 1px solid #fecaca;
+}
+
+/* Feature Cards */
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 1.5rem;
+  border: none;
+  box-shadow: 0 2px 12px 0 rgba(34, 197, 94, 0.06), 0 1px 2px 0 rgba(0,0,0,0.03);
+  background: #fff;
+  border-radius: 1rem;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.feature-card:hover {
+  box-shadow: 0 6px 24px 0 rgba(34, 197, 94, 0.12), 0 2px 8px 0 rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+
+.feature-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.search-feature-icon {
+  background-color: #d1fae5;
+}
+
+.verified-feature-icon {
+  background-color: #dcfce7;
+}
+
+.location-feature-icon {
+  background-color: #e9d5ff;
+}
+
+.search-feature-icon .icon {
+  color: #10b981;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.verified-feature-icon .icon {
+  color: #16a34a;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.location-feature-icon .icon {
+  color: #9333ea;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.feature-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.feature-description {
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+/* Generic Card Component */
+.card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.08), 0 1.5px 4px rgba(0,0,0,0.04);
+  border: 1px solid #e5e7eb;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: 0 8px 32px rgba(16, 185, 129, 0.16), 0 3px 8px rgba(0,0,0,0.08);
+  border-color: #10b981;
+  transform: translateY(-4px) scale(1.02);
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.card p {
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-background {
+      padding: 1.5rem 1rem;
+  }
+  
+  .search-card {
+      padding: 1.5rem;
+      max-width: 100%;
+  }
+  
+  .feature-cards {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+  }
+  
+  .feature-card {
+      padding: 1.25rem;
+  }
+  
+  .search-title {
+      font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-card {
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+  }
+  
+  .search-header {
+      margin-bottom: 1rem;
+  }
+  
+  .feature-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+  }
+  
+  .feature-icon .icon {
+      width: 1.25rem;
+      height: 1.25rem;
+  }
+}
+
+/* Legacy styles for backward compatibility */
+.healthcare-container {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #333;
+  background-color: #fff;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 100px;
+}
+
+.search-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.search-section h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Legacy responsive adjustments */
+@media (max-width: 768px) {
+  .healthcare-container {
+      min-height: 60vh;
+      padding-bottom: 80px;
+      justify-content: flex-start;
+  }
+}

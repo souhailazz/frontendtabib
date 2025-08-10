@@ -1,0 +1,366 @@
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import './App.css';
+import './i18n';
+import { FaSearch, FaBolt, FaHospitalAlt, FaMobileAlt, FaHeartbeat, FaBone, FaBrain, FaBaby, FaEye, FaTooth, FaFacebook, FaInstagram, FaLinkedin, FaMapMarkerAlt, FaEnvelope, FaPhone, FaClock, FaUserMd, FaCity, FaUserPlus, FaInfoCircle, FaSignInAlt, FaSignOutAlt, FaUserShield, FaRocket, FaHandsHelping, FaLock, FaFileMedical, FaGavel, FaBars, FaTimes } from 'react-icons/fa';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+
+import HealthcareSearch from './components/Search/healthcare-search';
+import ResponseSearch from './components/ResponseSearch/ResponseSearch';
+import Signup from './components/Signup/Signup';
+import LoginForm from './components/Login/Login';
+import MyConsultation from './components/MyConsultation/MyConsultation';
+import Dashboard from './components/Dashboard/Dashboard';
+import Admin from './components/Admin/Admin';
+import LanguageSwitcher from './components/LanguageSwitcher/LanguageSwitcher';
+import ProtectedRoute from './components/ProtectedRoute';
+
+// Home component
+const Home = () => {
+  const { t } = useTranslation();
+  
+  return (
+    <div className="home-container">
+      <div className="hero-section">
+        <h1>{t('home.hero.title')}</h1>
+        <p className="description">{t('home.hero.description')}</p>
+        <div className="cta-buttons">
+          <Link to="/search" className="primary-btn">{t('home.hero.findDoctors')}</Link>
+          <Link to="/about" className="secondary-btn">{t('home.hero.learnMore')}</Link>
+        </div>
+      </div>
+
+      <div className="features-section">
+        <h2>{t('home.features.title')}</h2>
+        <div className="features-grid">
+          <div className="feature-card">
+            <div className="feature-icon"><FaSearch /></div>
+            <h3>{t('home.features.easySearch.title')}</h3>
+            <p>{t('home.features.easySearch.description')}</p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon"><FaBolt /></div>
+            <h3>{t('home.features.quickBooking.title')}</h3>
+            <p>{t('home.features.quickBooking.description')}</p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon"><FaHospitalAlt /></div>
+            <h3>{t('home.features.verifiedDoctors.title')}</h3>
+            <p>{t('home.features.verifiedDoctors.description')}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="specialties-section">
+        <h2>{t('home.specialties.title')}</h2>
+        <div className="specialties-grid">
+          <div className="specialty-item">
+            <span className="specialty-emoji"><FaHeartbeat /></span>
+            <span>{t('home.specialties.cardiology')}</span>
+          </div>
+          <div className="specialty-item">
+            <span className="specialty-emoji"><FaBone /></span>
+            <span>{t('home.specialties.orthopedics')}</span>
+          </div>
+          <div className="specialty-item">
+            <span className="specialty-emoji"><FaBrain /></span>
+            <span>{t('home.specialties.neurology')}</span>
+          </div>
+          <div className="specialty-item">
+            <span className="specialty-emoji"><FaBaby /></span>
+            <span>{t('home.specialties.pediatrics')}</span>
+          </div>
+          <div className="specialty-item">
+            <span className="specialty-emoji"><FaEye /></span>
+            <span>{t('home.specialties.ophthalmology')}</span>
+          </div>
+          <div className="specialty-item">
+            <span className="specialty-emoji"><FaTooth /></span>
+            <span>{t('home.specialties.dentistry')}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="stats-section">
+        <h2>{t('home.stats.title')}</h2>
+        <div className="stats-grid">
+          <div className="stat-item">
+            <div className="stat-number">100+</div>
+            <div className="stat-label">{t('home.stats.doctors')}</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-number">10,000+</div>
+            <div className="stat-label">{t('home.stats.patients')}</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-number">12</div>
+            <div className="stat-label">{t('home.stats.cities')}</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-number">24/7</div>
+            <div className="stat-label">{t('home.stats.support')}</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="testimonials-section">
+        <h2>{t('home.testimonials.title')}</h2>
+        <div className="testimonials-grid">
+          <div className="testimonial-card">
+            <div className="testimonial-content">
+              <p>{t('home.testimonials.fatima')}</p>
+            </div>
+            <div className="testimonial-author">
+              <strong>Fatima K.</strong>
+              <span>Casablanca</span>
+            </div>
+          </div>
+          <div className="testimonial-card">
+            <div className="testimonial-content">
+              <p>{t('home.testimonials.ahmed')}</p>
+            </div>
+            <div className="testimonial-author">
+              <strong>Ahmed M.</strong>
+              <span>Marrakech</span>
+            </div>
+          </div>
+          <div className="testimonial-card">
+            <div className="testimonial-content">
+              <p>{t('home.testimonials.zineb')}</p>
+            </div>
+            <div className="testimonial-author">
+              <strong>Zineb A.</strong>
+              <span>Fez</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="cta-section">
+        <h2>{t('home.cta.title')}</h2>
+        <p>{t('home.cta.description')}</p>
+        <div className="cta-buttons">
+          <Link to="/search" className="primary-btn">{t('home.cta.findDoctor')}</Link>
+          <Link to="/Signup" className="secondary-btn">{t('home.cta.createAccount')}</Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// About component
+const About = () => {
+  const { t } = useTranslation();
+  
+  return (
+    <div className="about-container">
+      <h1>{t('about.title')}</h1>
+      <p>{t('about.description1')}</p>
+      <p>{t('about.description2')}</p>
+      
+      <div className="about-mission">
+        <h2>{t('about.mission.title')}</h2>
+        <p>{t('about.mission.description')}</p>
+      </div>
+
+      <div className="about-values">
+        <h2>{t('about.values.title')}</h2>
+        <div className="values-grid">
+          <div className="value-item">
+            <h3><FaUserShield /> {t('about.values.accessibility.title')}</h3>
+            <p>{t('about.values.accessibility.description')}</p>
+          </div>
+          <div className="value-item">
+            <h3><FaLock /> {t('about.values.trust.title')}</h3>
+            <p>{t('about.values.trust.description')}</p>
+          </div>
+          <div className="value-item">
+            <h3><FaRocket /> {t('about.values.innovation.title')}</h3>
+            <p>{t('about.values.innovation.description')}</p>
+          </div>
+          <div className="value-item">
+            <h3><FaHandsHelping /> {t('about.values.support.title')}</h3>
+            <p>{t('about.values.support.description')}</p>
+          </div>
+        </div>
+      </div>
+
+      <Link to="/" className="back-link">{t('about.backLink')}</Link>
+    </div>
+  );
+};
+
+// NotFound component
+const NotFound = () => {
+  const { t } = useTranslation();
+  
+  return (
+    <div className="not-found">
+      <h1>{t('notFound.title')}</h1>
+      <p>{t('notFound.description')}</p>
+      <Link to="/" className="back-link">{t('notFound.backLink')}</Link>
+    </div>
+  );
+};
+
+// AppContent component that can use useLocation
+const AppContent = () => {
+  const { isLoggedIn, userType, userId, logout } = useAuth();
+  const { t } = useTranslation();
+  const location = useLocation();
+  const [navOpen, setNavOpen] = useState(false); // Add state for mobile nav
+
+  const handleLogout = () => {
+    logout();
+    setNavOpen(false); // Close nav on logout
+  };
+
+  // Check if current path is admin page
+  const isAdminPage = location.pathname === '/admin';
+
+  // Close nav when route changes
+  useEffect(() => {
+    setNavOpen(false);
+  }, [location.pathname]);
+
+  return (
+    <div className="App">
+      <header className="app-header">
+        <div className="logo-container">
+          <Link to="/" className="logo-link">
+            <img src="/logo.svg" alt="Tabib.life logo" className="logo" style={{ height: '40px', verticalAlign: 'middle' }} />
+          </Link>
+        </div>
+        {/* Hamburger menu for mobile */}
+        <button
+          className="menu-toggle"
+          aria-label={navOpen ? "Close menu" : "Open menu"}
+          onClick={() => setNavOpen(!navOpen)}
+        >
+          {navOpen ? <FaTimes /> : <FaBars />}
+        </button>
+        <nav className={`main-nav${navOpen ? " open" : ""}`}>
+          <Link to="/" onClick={() => setNavOpen(false)}>{t('nav.home')}</Link>
+          <Link to="/search" onClick={() => setNavOpen(false)}>{t('nav.findDoctors')}</Link>
+          <Link to="/MyConsultation" onClick={() => setNavOpen(false)}>{t('nav.consultation')}</Link>
+          {isLoggedIn && userType === "docteur" && (
+            <Link to="/dashboard" onClick={() => setNavOpen(false)}>{t('nav.dashboard')}</Link>
+          )}
+          {isLoggedIn && userType === "patient" && userId === "1" && (
+            <Link to="/admin" onClick={() => setNavOpen(false)}>Admin Panel</Link>
+          )}
+          <Link to="/about" onClick={() => setNavOpen(false)}>{t('nav.about')}</Link>
+          <LanguageSwitcher />
+          {!isLoggedIn ? (
+            <Link to="/Login" onClick={() => setNavOpen(false)}>{t('nav.login')}</Link>
+          ) : (
+            <button onClick={handleLogout} className="logout-button">{t('nav.logout')}</button>
+          )}
+        </nav>
+      </header>
+
+      <main className="app-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/search" element={<HealthcareSearch />} />
+          <Route path="/Signup" element={<Signup />} />
+          <Route path="/Login" element={<LoginForm />} />
+          <Route path="/response-search" element={<ResponseSearch />} />
+          <Route path="/MyConsultation" element={
+            <ProtectedRoute>
+              <MyConsultation />
+            </ProtectedRoute>
+          } />
+          <Route path="/about" element={<About />} />
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
+          <Route path="/dashboard" element={
+            <ProtectedRoute requiredUserType="docteur">
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/admin" element={
+            <ProtectedRoute requiredUserTypeAndId={{ type: "patient", id: "1" }}>
+              <Admin />
+            </ProtectedRoute>
+          } />
+        </Routes>
+      </main>
+
+      {/* Conditionally render footer - hide on admin page */}
+      {!isAdminPage && (
+        <footer className="app-footer">
+          <div className="footer-content">
+            <div className="footer-section">
+              <h3>Tabib Healthcare</h3>
+              <p>{t('footer.description')}</p>
+              <div className="social-links">
+                <span>{t('footer.followUs')} </span>
+                <span> <FaFacebook /> </span>
+                <a href="#" className="social-link">Facebook</a>
+                <span> <FaInstagram /> </span>
+                <a href="#" className="social-link">Instagram</a>
+                <span> <FaLinkedin /> </span>
+                <a href="#" className="social-link">LinkedIn</a>
+              </div>
+            </div>
+            
+            <div className="footer-section">
+              <h4>{t('footer.quickLinks')}</h4>
+              <div className="footer-links">
+                <Link to="/search">{t('nav.findDoctors')}</Link>
+                <Link to="/about">{t('nav.about')}</Link>
+                <Link to="/MyConsultation">{t('nav.consultation')}</Link>
+                <Link to="/Signup">{t('home.cta.createAccount')}</Link>
+              </div>
+            </div>
+            
+            <div className="footer-section">
+              <h4>{t('footer.popularCities')}</h4>
+              <div className="footer-links">
+                <a href="#">Casablanca</a>
+                <a href="#">Rabat</a>
+                <a href="#">Marrakech</a>
+                <a href="#">Fez</a>
+                <a href="#">Tangier</a>
+                <a href="#">Agadir</a>
+              </div>
+            </div>
+            
+            <div className="footer-section">
+              <h4>{t('footer.contactInfo')}</h4>
+              <div className="contact-info">
+                <p><FaEnvelope /> admin@tabib.life</p>
+                <p><FaPhone /> +212 563308663</p>
+                <p><FaMapMarkerAlt /> Casablanca, Morocco</p>
+                <p><FaClock /> 24/7 Support</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="footer-bottom">
+            <p>{t('footer.copyright')}</p>
+            <div className="footer-legal">
+              <a href="#"><FaLock /> {t('footer.privacyPolicy')}</a>
+              <a href="#"><FaGavel /> {t('footer.termsOfService')}</a>
+              <a href="#"><FaFileMedical /> {t('footer.medicalDisclaimer')}</a>
+            </div>
+          </div>
+        </footer>
+      )}
+    </div>
+  );
+};
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </AuthProvider>
+  );
+}
+
+export default App;

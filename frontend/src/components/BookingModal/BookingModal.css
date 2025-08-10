@@ -1,0 +1,387 @@
+/* Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* Modal Container */
+.booking-modal {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  max-width: 450px; /* increased max-width for pricing space */
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+/* Modal Header for title and close button */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #047857; /* your green */
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6b7280;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.close-button:hover {
+  background: #d1fae5; /* lighter green hover */
+  color: #065f46;
+}
+
+/* Doctor Info Section */
+.doctor-info-section {
+  background: #f0fdf4; /* light green background */
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.doctor-details {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.doctor-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.doctor-name {
+  font-weight: 700;
+  color: #065f46;
+  font-size: 18px;
+}
+
+.specialty {
+  color: #10b981;
+  font-size: 14px;
+}
+
+/* Pricing Summary */
+.pricing-summary {
+  background: #ecfdf5; /* very light green */
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #a7f3d0; /* lighter green border */
+  color: #065f46;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: right;
+  user-select: none;
+}
+
+.pricing-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  color: #047857;
+}
+
+.pricing-row.total {
+  font-weight: 700;
+  font-size: 18px;
+  border-top: 1px solid #a7f3d0;
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+/* Labels */
+.booking-modal label {
+  font-weight: 500;
+  color: #374151;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Inputs and Textareas */
+.booking-modal input,
+.booking-modal textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1.5px solid #10b981;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: outline-color 0.3s ease;
+  outline-offset: 2px;
+  outline-color: transparent;
+  background: #f9fafb;
+}
+
+.booking-modal input:focus,
+.booking-modal textarea:focus {
+  outline-color: #059669;
+  background: white;
+}
+
+.booking-modal textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Time Slots Container */
+.time-slots-container,
+.time-slots-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.time-slot-btn {
+  padding: 0.5rem 1.2rem;
+  border: 1.5px solid #10b981;
+  background: #f0fdf4;
+  color: #047857;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 0.2rem;
+  outline: none;
+}
+
+.time-slot-btn:hover,
+.time-slot-btn.selected {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #fff;
+  border-color: #059669;
+  box-shadow: 0 2px 8px rgba(16,185,129,0.12);
+}
+
+.time-slot-btn:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  border-color: #d1d5db;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+/* Buttons */
+.confirm-button,
+.done-button {
+  padding: 12px 20px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  transition: background 0.3s ease;
+  flex: 1;
+}
+
+.confirm-button:hover,
+.done-button:hover {
+  background: #059669;
+}
+
+.cancel-button {
+  padding: 12px 20px;
+  background: #e5e7eb;
+  color: #374151;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: background 0.2s;
+  flex: 1;
+}
+
+.cancel-button:hover {
+  background: #d1d5db;
+}
+
+/* Loading Spinner - Now using the new LoadingSpinner component */
+
+/* Disabled button styles */
+.confirm-button:disabled,
+.cancel-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.confirm-button:disabled:hover {
+  background: #10b981;
+  transform: none;
+  box-shadow: none;
+}
+
+.cancel-button:disabled:hover {
+  background: #d1d5db;
+}
+
+/* Confirmation Screen */
+.confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.checkmark {
+  font-size: 64px;
+  color: #10b981;
+}
+
+/* Error message */
+.error-message {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  text-align: center;
+  border: 1px solid #fecaca;
+}
+
+/* Modal Actions Container */
+.modal-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .booking-modal {
+    padding: 20px;
+    margin: 20px;
+    max-width: 95%;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .doctor-info-section {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .pricing-summary {
+    text-align: center;
+  }
+
+  .time-slots-container {
+    justify-content: center;
+  }
+}
+/* Consultation Types Container */
+.consultation-types {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* Each Consultation Type Button */
+.consultation-type-btn {
+  padding: 14px 16px;
+  border: 1.5px solid #10b981;
+  border-radius: 12px;
+  background: #f0fdf4; /* very light green background */
+  color: #047857;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  user-select: none;
+}
+
+/* Hover effect */
+.consultation-type-btn:hover {
+  background: #10b981;
+  color: white;
+  border-color: #059669;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+}
+
+/* Selected state */
+.consultation-type-btn.selected {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border-color: #059669;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* Inside the button, if you want a name and price separated */
+.type-name {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.type-price {
+  font-size: 0.9rem;
+  color: #047857;
+}
+
+.consultation-type-btn.selected .type-price {
+  color: #d1fae5; /* lighter green for contrast */
+}
+
+/* Disabled consultation type (if needed) */
+.consultation-type-btn:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  border-color: #d1d5db;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+

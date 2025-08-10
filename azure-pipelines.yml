@@ -1,0 +1,30 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  imageName: 'medical-appointment-backend'
+  dockerUsername: 'souhailazz'
+
+steps:
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'backend/pom.xml'  # Adjust if needed
+      goals: 'clean package'
+      options: '--no-transfer-progress'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.21'  # Use 1.21 for Java 21
+      mavenVersionOption: 'Default'
+
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'dockerhubServiceConnection'  # Ensure this matches your Azure service connection name
+      repository: '$(dockerUsername)/$(imageName)'
+      command: 'buildAndPush'
+      Dockerfile: 'backend/Dockerfile'  # Adjust this path to where your Dockerfile is
+      tags: |
+        latest

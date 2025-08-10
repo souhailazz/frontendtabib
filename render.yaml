@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: tabib-backend
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /api/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+      - key: SERVER_PORT
+        value: 8080
+      - key: SPRING_DATASOURCE_URL
+        sync: false  # You'll set this in Render dashboard
+      - key: SPRING_DATASOURCE_USERNAME
+        sync: false  # You'll set this in Render dashboard
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false  # You'll set this in Render dashboard
+      - key: STRIPE_SECRET_KEY
+        sync: false  # You'll set this in Render dashboard
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+      - key: SPRING_JPA_SHOW_SQL
+        value: false
+      - key: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_WEB
+        value: INFO 
