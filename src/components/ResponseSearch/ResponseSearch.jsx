@@ -61,7 +61,7 @@ const handleModalConfirm = async (bookingData) => {
       }
 
       try {
-        const apiUrl = `https://tabib-c9pp.onrender.com/api/docteurs/search?${searchParams.toString()}`;
+        const apiUrl = `https://tabiblife.zeabur.app/api/docteurs/search?${searchParams.toString()}`;
         const response = await fetch(apiUrl, {
           method: "GET",
           headers: {

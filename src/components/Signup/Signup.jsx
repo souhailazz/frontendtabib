@@ -57,8 +57,8 @@ export default function Signup() {
       
       // Determine which API endpoint to use based on user type
       const endpoint = userType === 'patient' 
-        ? 'https://tabib-c9pp.onrender.com/api/patients'
-        : 'https://tabib-c9pp.onrender.com/api/docteurs';
+        ? 'https://tabiblife.zeabur.app/api/patients'
+        : 'https://tabiblife.zeabur.app/api/docteurs';
       
       // Create a payload with only the relevant fields for the user type
       const payload = { ...formData };

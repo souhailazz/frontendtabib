@@ -35,8 +35,8 @@ function LoginForm() {
     try {
       const url =
         userType === "patient"
-          ? "https://tabib-c9pp.onrender.com/api/patients/login"
-          : "https://tabib-c9pp.onrender.com/api/docteurs/login"
+          ? "https://tabiblife.zeabur.app/api/patients/login"
+          : "https://tabiblife.zeabur.app/api/docteurs/login"
 
       const payload =
         userType === "patient"
