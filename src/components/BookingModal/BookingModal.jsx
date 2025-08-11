@@ -4,8 +4,11 @@ import "./BookingModal.css";
 import { useTranslation } from "react-i18next";
 import PaymentModal from "../PaymentModal/PaymentModal";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function BookingModal({ doctor, onClose, onConfirm }) {
+  const { userId } = useAuth(); // ✅ Get logged-in user's ID
+
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [reason, setReason] = useState("");
@@ -107,7 +110,7 @@ export default function BookingModal({ doctor, onClose, onConfirm }) {
       // Create consultation first
       const consultationData = {
         docteurId: doctor.id,
-        patientId: 1, // This should come from user context/authentication
+        patientId: parseInt(userId, 10), // This should come from user context/authentication
         dateConsultation: `${date}T${time}:00`,
         reason: reason,
         consultationType: consultationType,
