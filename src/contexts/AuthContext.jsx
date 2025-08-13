@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
   const [userId, setUserId] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
   const [userName, setUserName] = useState(null);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   // Check authentication status on mount
   useEffect(() => {
@@ -26,11 +27,14 @@ export const AuthProvider = ({ children }) => {
 
     if (storedUserId && storedUserType) {
       setIsLoggedIn(true);
-      setUserId(storedUserId); // Already stored as string
+      setUserId(storedUserId);
       setUserType(storedUserType);
       setUserEmail(storedUserEmail);
       setUserName(storedUserName);
     }
+    
+    // Mark as initialized after checking
+    setIsInitialized(true);
   }, []);
 
   const login = (userData) => {
@@ -70,6 +74,7 @@ export const AuthProvider = ({ children }) => {
     userId,
     userEmail,
     userName,
+    isInitialized,
     login,
     logout
   };
@@ -79,4 +84,4 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-}; 
+};

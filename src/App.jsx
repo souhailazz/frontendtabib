@@ -15,6 +15,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Admin from './components/Admin/Admin';
 import LanguageSwitcher from './components/LanguageSwitcher/LanguageSwitcher';
 import ProtectedRoute from './components/ProtectedRoute';
+import SessionStorageTest from './components/SessionStorageTest/SessionStorageTest';
 
 // Home component
 const Home = () => {
@@ -273,6 +274,7 @@ const AppContent = () => {
             </ProtectedRoute>
           } />
           <Route path="/about" element={<About />} />
+          <Route path="/SessionStorageTest" element={<SessionStorageTest />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
           <Route path="/dashboard" element={

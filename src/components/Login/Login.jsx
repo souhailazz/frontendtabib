@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next"
 import "./Login.css"
 import { Navigate, useNavigate } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
+import BookingModal from "../BookingModal/BookingModal"
+import { BookingSessionUtils } from "../../utils/BookingSessionUtils"
 
 function LoginForm() {
   const navigate = useNavigate()
@@ -27,6 +29,19 @@ function LoginForm() {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
+  }
+
+  const handlePostLoginRedirect = () => {
+    if (BookingSessionUtils.hasPendingBooking()) {
+      const savedSession = BookingSessionUtils.getSavedBookingData();
+      
+      if (savedSession && savedSession.returnPath) {
+        navigate(savedSession.returnPath);
+        return;
+      }
+    }
+    
+    navigate("/search");
   }
 
   const handleSubmit = async (e) => {
@@ -61,16 +76,10 @@ function LoginForm() {
       const contentType = response.headers.get('content-type');
       
       if (contentType && contentType.includes('application/json')) {
-        // Server returned JSON
         data = await response.json();
-        console.log("Login Response Data:", data);
       } else {
-        // Server returned plain text or other format
         const errorText = await response.text();
-        console.log("Server returned plain text error:", errorText);
-        
         if (!response.ok) {
-          // Show user-friendly error message
           throw new Error(t('login.error.invalidCredentials'));
         }
       }
@@ -79,29 +88,22 @@ function LoginForm() {
         throw new Error(data?.message || t('login.error.invalidCredentials'));
       }
 
-      // Use the AuthContext login method to update global state
       const userData = {
-        id: data.id, // Keep as original type, AuthContext will convert to string
+        id: data.id, 
         userType: userType,
         email: data.email,
         name: `${data.prenom} ${data.nom}`
       }
       
       login(userData)
-      
-      console.log("Stored User Data:", {
-        userId: userData.id,
-        userType: userData.userType
-      })
 
       toast.success(t('common.success'), { 
         autoClose: 1500,
         onClose: () => {
-          navigate("/search")
+          handlePostLoginRedirect();
         }
       })
     } catch (error) {
-      console.error("Login error:", error)
       toast.error(error.message || t('login.error.invalidCredentials'), { autoClose: 1500 })
     }
   }

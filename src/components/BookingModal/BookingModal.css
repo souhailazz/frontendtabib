@@ -12,7 +12,39 @@
   justify-content: center;
   z-index: 999;
 }
+.auth-warning {
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #856404;
+}
 
+.auth-warning p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* For Login.css */
+.booking-restoration-notice {
+  background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+  border: 1px solid #17a2b8;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #0c5460;
+}
+
+.booking-restoration-notice p {
+  margin: 0;
+  font-weight: 500;
+}
 /* Modal Container */
 .booking-modal {
   background: white;

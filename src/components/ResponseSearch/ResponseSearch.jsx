@@ -6,13 +6,16 @@ import DoctorMap from "../DoctorMap/DoctorMap";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import "./ResponseSearch.css";
 import BookingModal from "../BookingModal/BookingModal";
+import { useAuth } from "../../contexts/AuthContext";
+import { BookingSessionUtils } from "../../utils/BookingSessionUtils";
 
 export default function ResponseSearch() {
   const [searchParams] = useSearchParams();
-  const date = searchParams.get("date"); // e.g. "2025-07-22"
-  const time = searchParams.get("time"); // e.g. "14:30"
+  const { isLoggedIn } = useAuth();
+  const date = searchParams.get("date");
+  const time = searchParams.get("time");
   const selectedDateTime = date && time ? `${date}T${time}:00` : null;
-  const reason = searchParams.get("reason"); // add this line
+  const reason = searchParams.get("reason");
 
   const [selectedDoctorId, setSelectedDoctorId] = useState(null);
   const [bookingDate, setBookingDate] = useState('');
@@ -29,7 +32,49 @@ export default function ResponseSearch() {
   const specialty = searchParams.get("specialite");
   const city = searchParams.get("city");
 
-  // Replace inline booking logic with modal logic
+  useEffect(() => {
+    const checkPendingBooking = () => {
+      if (!BookingSessionUtils.hasPendingBooking() || !isLoggedIn) {
+        return;
+      }
+
+      const savedSession = BookingSessionUtils.getSavedBookingData();
+      if (!savedSession) {
+        return;
+      }
+
+      const { bookingData } = savedSession;
+      
+      // Find the doctor from the current doctors list or use saved doctor data
+      let doctorToBook = doctors.find(d => d.id === bookingData.doctorId);
+      
+      // If doctor not found in current list, use saved doctor data
+      if (!doctorToBook && bookingData.doctorData) {
+        doctorToBook = bookingData.doctorData;
+      }
+      
+      if (doctorToBook) {
+        // Store the booking data temporarily in a different key for the modal to read
+        sessionStorage.setItem('modalBookingData', JSON.stringify(bookingData));
+        
+        // Open modal immediately - the modal will handle the data loading
+        setModalDoctor(doctorToBook);
+        setShowBookingModal(true);
+      } else {
+        // Clear invalid booking data using utility
+        BookingSessionUtils.clearBookingSession();
+      }
+    };
+
+    // Check for pending booking when component mounts and when doctors are loaded
+    if (doctors.length > 0) {
+      // Add a small delay to ensure all state updates are complete
+      const timeoutId = setTimeout(checkPendingBooking, 100);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [doctors, isLoggedIn]);
+
+  // Original booking modal handlers
   const handleOpenBookingModal = (doctor) => {
     setModalDoctor(doctor);
     setShowBookingModal(true);
@@ -40,17 +85,9 @@ export default function ResponseSearch() {
     setModalDoctor(null);
   };
 
-  // Updated handleModalConfirm function in ResponseSearch.js
-
-const handleModalConfirm = async (bookingData) => {
-  // The consultation is already created in BookingModal
-  // This function is called after successful payment
-  // We don't need to create another consultation here
-  console.log('Booking confirmed with data:', bookingData);
-  return true;
-};
-  
-
+  const handleModalConfirm = async (bookingData) => {
+    return true;
+  };
 
   useEffect(() => {
     const fetchDoctors = async () => {
@@ -62,6 +99,7 @@ const handleModalConfirm = async (bookingData) => {
 
       try {
         const apiUrl = `https://tabiblife.zeabur.app/api/docteurs/search?${searchParams.toString()}`;
+        
         const response = await fetch(apiUrl, {
           method: "GET",
           headers: {
@@ -89,7 +127,6 @@ const handleModalConfirm = async (bookingData) => {
         setDoctors(data);
         setError(null);
       } catch (err) {
-        console.error("Fetch error:", err);
         setError(err.message);
         setDoctors([]);
       } finally {
@@ -183,12 +220,9 @@ const handleModalConfirm = async (bookingData) => {
                     </div>
                   </div>
 
-                  {/* Book Button */}
                   <button onClick={() => handleOpenBookingModal(doctor)} className="book-consultation">
                     {t('responseSearch.bookConsultation')}
                   </button>
-
-                  {/* Remove inline booking form */}
                 </div>
               ))}
 
@@ -220,9 +254,6 @@ const handleModalConfirm = async (bookingData) => {
           onConfirm={handleModalConfirm}
         />
       )}
-
-      
     </div>
   );
-  
 }
