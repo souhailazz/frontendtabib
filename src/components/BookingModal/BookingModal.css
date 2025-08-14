@@ -59,6 +59,7 @@
   flex-direction: column;
   gap: 16px;
   position: relative;
+  z-index: 1001;
 }
 
 /* Modal Header for title and close button */
@@ -417,3 +418,41 @@
   text-decoration: line-through;
 }
 
+/* Redirect Modal Styles */
+.redirect-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.redirect-modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.redirect-modal h3 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.redirect-modal p {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

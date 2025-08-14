@@ -25,6 +25,7 @@ export default function BookingModal({ doctor, onClose, onConfirm }) {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [bookingData, setBookingData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [showRedirectModal, setShowRedirectModal] = useState(false);
 
   // guards to avoid double-restore loops in fast HMR/renders
   const hasRestoredRef = useRef(false);
@@ -174,10 +175,9 @@ export default function BookingModal({ doctor, onClose, onConfirm }) {
     }
 
     if (!isLoggedIn || !userId) {
-      // Save draft + redirect to login
+      // Save draft + show redirect modal
       saveBookingDataToSession();
-      setError("Please log in to continue with your booking...");
-      setTimeout(() => navigate("/login"), 800);
+      setShowRedirectModal(true);
       return;
     }
 
@@ -248,6 +248,12 @@ export default function BookingModal({ doctor, onClose, onConfirm }) {
     // Here we clear everything to avoid ghost restores unless you want to keep drafts on cancel
     clearBookingSession();
     onClose?.();
+  };
+
+  // Add this function to handle the navigation after showing the modal
+  const handleRedirectToLogin = () => {
+    setShowRedirectModal(false);
+    setTimeout(() => navigate("/login"), 300);
   };
 
   // Render
@@ -388,6 +394,25 @@ export default function BookingModal({ doctor, onClose, onConfirm }) {
         </div>
 
         {error && <div className="error-message">{error}</div>}
+
+        {/* Redirect Modal */}
+        {showRedirectModal && (
+          <div className="redirect-modal-overlay">
+            <div className="redirect-modal">
+              <h3>Redirecting to Login</h3>
+              <p>Please log in to continue with your booking. You'll be redirected shortly...</p>
+              <div className="modal-actions" style={{justifyContent: 'center', marginTop: '20px'}}>
+                <button 
+                  className="confirm-button" 
+                  onClick={handleRedirectToLogin}
+                  style={{padding: '8px 20px'}}
+                >
+                  Go to Login
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Payment Modal */}
         <PaymentModal
