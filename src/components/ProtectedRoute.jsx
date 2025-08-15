@@ -2,7 +2,12 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 const ProtectedRoute = ({ children, requiredUserType = null, requiredUserId = null, requiredUserTypeAndId = null }) => {
-  const { isLoggedIn, userType, userId } = useAuth();
+  const { isLoggedIn, userType, userId, isInitialized } = useAuth();
+
+  // Show loading state while checking authentication
+  if (!isInitialized) {
+    return <div>Loading...</div>; // Or a loading spinner component
+  }
 
   // If not logged in, redirect to login
   if (!isLoggedIn) {
@@ -27,4 +32,4 @@ const ProtectedRoute = ({ children, requiredUserType = null, requiredUserId = nu
   return children;
 };
 
-export default ProtectedRoute; 
+export default ProtectedRoute;
