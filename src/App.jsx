@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link, Navigate, useNavigate, us
 import { useTranslation } from 'react-i18next';
 import './App.css';
 import './i18n';
-import { FaSearch, FaBolt, FaHospitalAlt, FaMobileAlt, FaHeartbeat, FaBone, FaBrain, FaBaby, FaEye, FaTooth, FaFacebook, FaInstagram, FaLinkedin, FaMapMarkerAlt, FaEnvelope, FaPhone, FaClock, FaUserMd, FaCity, FaUserPlus, FaInfoCircle, FaSignInAlt, FaSignOutAlt, FaUserShield, FaRocket, FaHandsHelping, FaLock, FaFileMedical, FaGavel, FaBars, FaTimes } from 'react-icons/fa';
+import { FaSearch, FaBolt, FaHospitalAlt, FaMobileAlt, FaHeartbeat, FaBone, FaBrain, FaBaby, FaEye, FaTooth, FaFacebook, FaInstagram, FaLinkedin, FaMapMarkerAlt, FaEnvelope, FaPhone, FaClock, FaUserMd, FaCity, FaUserPlus, FaInfoCircle, FaSignInAlt, FaSignOutAlt, FaUserShield, FaRocket, FaHandsHelping, FaLock, FaFileMedical, FaGavel, FaBars, FaTimes, FaUser, FaChevronDown } from 'react-icons/fa';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Profiles from './components/Profiles/Profiles';
 import HealthcareSearch from './components/Search/healthcare-search';
@@ -211,10 +211,12 @@ const AppContent = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const [navOpen, setNavOpen] = useState(false); // Add state for mobile nav
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false); // Add state for profile dropdown
 
   const handleLogout = () => {
     logout();
     setNavOpen(false); // Close nav on logout
+    setProfileDropdownOpen(false); // Close profile dropdown on logout
   };
 
   // Check if current path is admin page
@@ -223,7 +225,22 @@ const AppContent = () => {
   // Close nav when route changes
   useEffect(() => {
     setNavOpen(false);
+    setProfileDropdownOpen(false); // Also close profile dropdown on route change
   }, [location.pathname]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('.profile-dropdown')) {
+        setProfileDropdownOpen(false);
+      }
+    };
+
+    if (profileDropdownOpen) {
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+    }
+  }, [profileDropdownOpen]);
 
   return (
     <div className="App">
@@ -253,11 +270,42 @@ const AppContent = () => {
           )}
           <Link to="/about" onClick={() => setNavOpen(false)}>{t('nav.about')}</Link>
           <LanguageSwitcher />
-          {!isLoggedIn ? (
-            <Link to="/Login" onClick={() => setNavOpen(false)}>{t('nav.login')}</Link>
-          ) : (
-            <button onClick={handleLogout} className="logout-button">{t('nav.logout')}</button>
-          )}
+          
+          {/* Profile dropdown */}
+          <div className="profile-dropdown">
+            <button 
+              className="profile-trigger"
+              onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+              aria-label="Profile menu"
+            >
+              <FaUser />
+              <FaChevronDown className={`dropdown-arrow ${profileDropdownOpen ? 'open' : ''}`} />
+            </button>
+            
+            {profileDropdownOpen && (
+              <div className="dropdown-menu">
+                {!isLoggedIn ? (
+                  <>
+                    <Link to="/Login" onClick={() => { setNavOpen(false); setProfileDropdownOpen(false); }}>
+                      <FaSignInAlt /> {t('nav.login')}
+                    </Link>
+                    <Link to="/Signup" onClick={() => { setNavOpen(false); setProfileDropdownOpen(false); }}>
+                      <FaUserPlus /> {t('home.cta.createAccount')}
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/Profile" onClick={() => { setNavOpen(false); setProfileDropdownOpen(false); }}>
+                      <FaUser /> My Profile
+                    </Link>
+                    <button onClick={handleLogout} className="dropdown-logout-button">
+                      <FaSignOutAlt /> {t('nav.logout')}
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
         </nav>
       </header>
 
