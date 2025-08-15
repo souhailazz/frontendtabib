@@ -413,7 +413,6 @@ export default function BookingModal({ doctor, onClose, onConfirm }) {
             </div>
           </div>
         )}
-
         {/* Payment Modal */}
         <PaymentModal
           isOpen={showPaymentModal}

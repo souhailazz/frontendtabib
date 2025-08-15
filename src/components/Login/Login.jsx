@@ -44,69 +44,65 @@ function LoginForm() {
     navigate("/search");
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  // Key changes to your Login component's handleSubmit function:
 
-    try {
-      const url =
-        userType === "patient"
-          ? "https://tabiblife.zeabur.app/api/patients/login"
-          : "https://tabiblife.zeabur.app/api/docteurs/login"
+const handleSubmit = async (e) => {
+  e.preventDefault()
 
-      const payload =
-        userType === "patient"
-          ? {
-              email: formData.email,
-              motDePasse: formData.password,
-            }
-          : {
-              numeroProfessionnel: formData.numeroProfessionnel,
-              motDePasse: formData.password,
-            }
+  try {
+    const payload =
+      userType === "patient"
+        ? {
+            email: formData.email,
+            motDePasse: formData.password,
+          }
+        : {
+            numeroProfessionnel: formData.numeroProfessionnel,
+            motDePasse: formData.password,
+          }
 
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      })
+    const url = userType === "patient"
+      ? "https://tabiblife.zeabur.app/api/patients/login"
+      : "https://tabiblife.zeabur.app/api/docteurs/login"
 
-      let data;
-      const contentType = response.headers.get('content-type');
-      
-      if (contentType && contentType.includes('application/json')) {
-        data = await response.json();
-      } else {
-        const errorText = await response.text();
-        if (!response.ok) {
-          throw new Error(t('login.error.invalidCredentials'));
-        }
-      }
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: userType === "patient" ? "include" : "omit",
+      body: JSON.stringify(payload),
+    })
 
-      if (!response.ok) {
-        throw new Error(data?.message || t('login.error.invalidCredentials'));
-      }
-
-      const userData = {
-        id: data.id, 
-        userType: userType,
-        email: data.email,
-        name: `${data.prenom} ${data.nom}`
-      }
-      
-      login(userData)
-
-      toast.success(t('common.success'), { 
-        autoClose: 1500,
-        onClose: () => {
-          handlePostLoginRedirect();
-        }
-      })
-    } catch (error) {
-      toast.error(error.message || t('login.error.invalidCredentials'), { autoClose: 1500 })
+    if (!response.ok) {
+      throw new Error(t('login.error.invalidCredentials'));
     }
+
+    const data = await response.json();
+
+    // Make sure we're extracting the right data from the response
+    const userData = {
+      id: data.id, 
+      userType: userType, // Use the userType from the form, not from response
+      email: data.email,
+      name: `${data.prenom} ${data.nom}`
+    }
+    
+    console.log('Login successful, user data:', userData); // Debug log
+    
+    login(userData)
+
+    toast.success(t('common.success'), { 
+      autoClose: 1500,
+      onClose: () => {
+        handlePostLoginRedirect();
+      }
+    })
+  } catch (error) {
+    console.error('Login error:', error); // Debug log
+    toast.error(error.message || t('login.error.invalidCredentials'), { autoClose: 1500 })
   }
+}
 
   return (
     <div className="login-container">

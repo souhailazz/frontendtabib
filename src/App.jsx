@@ -5,7 +5,7 @@ import './App.css';
 import './i18n';
 import { FaSearch, FaBolt, FaHospitalAlt, FaMobileAlt, FaHeartbeat, FaBone, FaBrain, FaBaby, FaEye, FaTooth, FaFacebook, FaInstagram, FaLinkedin, FaMapMarkerAlt, FaEnvelope, FaPhone, FaClock, FaUserMd, FaCity, FaUserPlus, FaInfoCircle, FaSignInAlt, FaSignOutAlt, FaUserShield, FaRocket, FaHandsHelping, FaLock, FaFileMedical, FaGavel, FaBars, FaTimes } from 'react-icons/fa';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
-
+import Profiles from './components/Profiles/Profiles';
 import HealthcareSearch from './components/Search/healthcare-search';
 import ResponseSearch from './components/ResponseSearch/ResponseSearch';
 import Signup from './components/Signup/Signup';
@@ -272,6 +272,9 @@ const AppContent = () => {
             <ProtectedRoute>
               <MyConsultation />
             </ProtectedRoute>
+          } />
+          <Route path="/Profile" element={
+              <Profiles />
           } />
           <Route path="/about" element={<About />} />
           <Route path="/SessionStorageTest" element={<SessionStorageTest />} />
