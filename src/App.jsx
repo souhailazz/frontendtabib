@@ -16,6 +16,9 @@ import Admin from './components/Admin/Admin';
 import LanguageSwitcher from './components/LanguageSwitcher/LanguageSwitcher';
 import ProtectedRoute from './components/ProtectedRoute';
 import SessionStorageTest from './components/SessionStorageTest/SessionStorageTest';
+import PrivacyPolicy from './components/Legal/PrivacyPolicy';
+import TermsOfService from './components/Legal/TermsOfService';
+import MedicalDisclaimer from './components/Legal/MedicalDisclaimer';
 
 // Home component
 const Home = () => {
@@ -325,6 +328,9 @@ const AppContent = () => {
               <Profiles />
           } />
           <Route path="/about" element={<About />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/medical-disclaimer" element={<MedicalDisclaimer />} />
           <Route path="/SessionStorageTest" element={<SessionStorageTest />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
@@ -393,9 +399,9 @@ const AppContent = () => {
           <div className="footer-bottom">
             <p>{t('footer.copyright')}</p>
             <div className="footer-legal">
-              <a href="#"><FaLock /> {t('footer.privacyPolicy')}</a>
-              <a href="#"><FaGavel /> {t('footer.termsOfService')}</a>
-              <a href="#"><FaFileMedical /> {t('footer.medicalDisclaimer')}</a>
+              <Link to="/privacy-policy"><FaLock /> {t('footer.privacyPolicy')}</Link>
+              <Link to="/terms-of-service"><FaGavel /> {t('footer.termsOfService')}</Link>
+              <Link to="/medical-disclaimer"><FaFileMedical /> {t('footer.medicalDisclaimer')}</Link>
             </div>
           </div>
         </footer>

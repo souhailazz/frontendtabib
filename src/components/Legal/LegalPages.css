@@ -1,0 +1,125 @@
+/* Legal Pages Shared Styles */
+.legal-document {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.7;
+  color: #2d3748;
+  background-color: #f8fafc;
+  min-height: 100vh;
+  padding: 2rem 0;
+}
+
+.legal-document .container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 2.5rem;
+  margin: 2rem auto;
+}
+
+.legal-document h1 {
+  color: #2d3748;
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 1rem;
+}
+
+.legal-document h2 {
+  color: #2d3748;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.legal-document h3 {
+  color: #4a5568;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+}
+
+.legal-document p {
+  margin-bottom: 1.25rem;
+  color: #4a5568;
+  line-height: 1.7;
+}
+
+.legal-document ul, 
+.legal-document ol {
+  margin: 1rem 0 1.5rem 1.5rem;
+  padding-left: 1rem;
+}
+
+.legal-document li {
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+}
+
+.legal-document a {
+  color: #3182ce;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.legal-document a:hover {
+  color: #2c5282;
+  text-decoration: underline;
+}
+
+/* Specific section styles */
+.legal-document section {
+  margin-bottom: 2.5rem;
+}
+
+/* Highlight boxes */
+.legal-document .highlight-box {
+  background-color: #f8fafc;
+  border-left: 4px solid #4299e1;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .legal-document .container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .legal-document h1 {
+    font-size: 1.75rem;
+  }
+  
+  .legal-document h2 {
+    font-size: 1.35rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .legal-document {
+    background: white;
+    padding: 0;
+  }
+  
+  .legal-document .container {
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .legal-document h1, 
+  .legal-document h2, 
+  .legal-document h3 {
+    page-break-after: avoid;
+  }
+  
+  .legal-document section {
+    page-break-inside: avoid;
+  }
+}
