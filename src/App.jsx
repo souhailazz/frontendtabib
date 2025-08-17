@@ -329,9 +329,7 @@ const AppContent = () => {
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
           <Route path="/dashboard" element={
-            <ProtectedRoute requiredUserType="docteur">
               <Dashboard />
-            </ProtectedRoute>
           } />
           <Route path="/admin" element={
             <ProtectedRoute requiredUserTypeAndId={{ type: "patient", id: "1" }}>

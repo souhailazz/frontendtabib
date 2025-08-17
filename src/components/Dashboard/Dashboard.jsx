@@ -14,20 +14,23 @@ const Dashboard = () => {
   const [selectedDateRange, setSelectedDateRange] = useState('thisMonth');
   const { t } = useTranslation();
 
-  const userId = localStorage.getItem('userId');
-  const userType = localStorage.getItem('userType');
+  const userId = sessionStorage.getItem('userId');
+  const userType = sessionStorage.getItem('userType');
 
   // API fetching functions
   const fetchData = async () => {
     try {
-      if (userType !== 'docteur') {
+      console.log('Current userType from localStorage:', userType); // Debug log
+      
+      if (!userType || userType.toLowerCase() !== 'docteur') {
+        console.error('Access denied - userType is not "docteur". Current userType:', userType);
         throw new Error(t('dashboard.error.accessDenied'));
       }
-
+  
       if (!userId) {
+        console.error('No userId found in localStorage');
         throw new Error(t('dashboard.error.userIdNotFound'));
       }
-
       const [doctorRes, consultationsRes, ordonnancesRes] = await Promise.all([
         fetch(`https://tabiblife.zeabur.app/api/docteurs/${userId}`),
         fetch(`https://tabiblife.zeabur.app/api/consultations/doctor/${userId}`),
