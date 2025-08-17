@@ -19,19 +19,54 @@ import SessionStorageTest from './components/SessionStorageTest/SessionStorageTe
 import PrivacyPolicy from './components/Legal/PrivacyPolicy';
 import TermsOfService from './components/Legal/TermsOfService';
 import MedicalDisclaimer from './components/Legal/MedicalDisclaimer';
+import { getOptimalImageSource } from './utils/imageUtils';
+import heroBgWebP from './assets/healthcare-hero-bg.webp';
+import heroBgPNG from './assets/healthcare-hero-bg.png';
 
 // Home component
 const Home = () => {
   const { t } = useTranslation();
+  const [bgImage, setBgImage] = useState('');
+  
+  useEffect(() => {
+    let isMounted = true;
+    
+    const loadImage = async () => {
+      try {
+        const imgSrc = await getOptimalImageSource(heroBgWebP, heroBgPNG);
+        if (isMounted) {
+          const img = new Image();
+          img.onload = () => setBgImage(imgSrc);
+          img.src = imgSrc;
+        }
+      } catch (error) {
+        console.error('Error loading image:', error);
+        if (isMounted) setBgImage(heroBgPNG); // Fallback to PNG on error
+      }
+    };
+    
+    loadImage();
+    
+    return () => {
+      isMounted = false;
+    };
+  }, []);
   
   return (
     <div className="home-container">
-      <div className="hero-section">
-        <h1>{t('home.hero.title')}</h1>
-        <p className="description">{t('home.hero.description')}</p>
-        <div className="cta-buttons">
-          <Link to="/search" className="primary-btn">{t('home.hero.findDoctors')}</Link>
-          <Link to="/about" className="secondary-btn">{t('home.hero.learnMore')}</Link>
+      <div 
+        className="hero-section"
+        style={{
+          backgroundImage: `linear-gradient(rgba(15, 76, 117, 0.3), rgba(15, 76, 117, 0.5))${bgImage ? `, url(${bgImage})` : ''}`,
+        }}
+      >
+        <div className="hero-content">
+          <h1>{t('home.hero.title')}</h1>
+          <p className="description">{t('home.hero.description')}</p>
+          <div className="cta-buttons">
+            <Link to="/search" className="primary-btn">{t('home.hero.findDoctors')}</Link>
+            <Link to="/about" className="secondary-btn">{t('home.hero.learnMore')}</Link>
+          </div>
         </div>
       </div>
 
