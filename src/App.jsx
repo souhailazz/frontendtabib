@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './App.css';
 import './i18n';
+import heroBg from './assets/healthcare-hero-bg.png';
 import { FaSearch, FaBolt, FaHospitalAlt, FaMobileAlt, FaHeartbeat, FaBone, FaBrain, FaBaby, FaEye, FaTooth, FaFacebook, FaInstagram, FaLinkedin, FaMapMarkerAlt, FaEnvelope, FaPhone, FaClock, FaUserMd, FaCity, FaUserPlus, FaInfoCircle, FaSignInAlt, FaSignOutAlt, FaUserShield, FaRocket, FaHandsHelping, FaLock, FaFileMedical, FaGavel, FaBars, FaTimes, FaUser, FaChevronDown } from 'react-icons/fa';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { ScrollContainer, ScrollSection } from './components/ScrollContainer/ScrollContainer';
+import { ScrollIndicator } from './components/ScrollIndicator/ScrollIndicator';
 import Profiles from './components/Profiles/Profiles';
 import HealthcareSearch from './components/Search/healthcare-search';
 import ResponseSearch from './components/ResponseSearch/ResponseSearch';
@@ -19,172 +22,194 @@ import SessionStorageTest from './components/SessionStorageTest/SessionStorageTe
 import PrivacyPolicy from './components/Legal/PrivacyPolicy';
 import TermsOfService from './components/Legal/TermsOfService';
 import MedicalDisclaimer from './components/Legal/MedicalDisclaimer';
-import { getOptimalImageSource } from './utils/imageUtils';
-import heroBgWebP from './assets/healthcare-hero-bg.webp';
-import heroBgPNG from './assets/healthcare-hero-bg.png';
 
 // Home component
 const Home = () => {
   const { t } = useTranslation();
-  const [bgImage, setBgImage] = useState('');
+  const [activeSection, setActiveSection] = useState(0);
+  const scrollContainerRef = useRef(null);
   
-  useEffect(() => {
-    let isMounted = true;
-    
-    const loadImage = async () => {
-      try {
-        const imgSrc = await getOptimalImageSource(heroBgWebP, heroBgPNG);
-        if (isMounted) {
-          const img = new Image();
-          img.onload = () => setBgImage(imgSrc);
-          img.src = imgSrc;
-        }
-      } catch (error) {
-        console.error('Error loading image:', error);
-        if (isMounted) setBgImage(heroBgPNG); // Fallback to PNG on error
-      }
-    };
-    
-    loadImage();
-    
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  const sections = ['hero', 'features', 'specialties', 'stats', 'testimonials', 'cta'];
   
+  const scrollToSection = (index) => {
+    if (scrollContainerRef.current && scrollContainerRef.current.children[index]) {
+      scrollContainerRef.current.children[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
-    <div className="home-container">
-      <div 
-        className="hero-section"
-        style={{
-          backgroundImage: `linear-gradient(rgba(15, 76, 117, 0.3), rgba(15, 76, 117, 0.5))${bgImage ? `, url(${bgImage})` : ''}`,
-        }}
+    <>
+      <ScrollContainer 
+        ref={scrollContainerRef}
+        onSectionChange={setActiveSection}
       >
-        <div className="hero-content">
-          <h1>{t('home.hero.title')}</h1>
-          <p className="description">{t('home.hero.description')}</p>
+        <ScrollSection id="hero" className="hero-section">
+          {/* Background Image */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 0,
+            overflow: 'hidden'
+          }}>
+            <img 
+              src={heroBg} 
+              alt="Background"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center'
+              }}
+            />
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'linear-gradient(rgba(15, 76, 117, 0.6), rgba(15, 76, 117, 0.8))',
+              zIndex: 1
+            }} />
+          </div>
+          
+          <div className="hero-content">
+            <h1>{t('home.hero.title')}</h1>
+            <p className="description">{t('home.hero.description')}</p>
+            <div className="cta-buttons">
+              <Link to="/search" className="primary-btn">{t('home.hero.findDoctors')}</Link>
+              <Link to="/about" className="secondary-btn">{t('home.hero.learnMore')}</Link>
+            </div>
+          </div>
+        </ScrollSection>
+
+        <ScrollSection id="features" className="features-section">
+          <h2>{t('home.features.title')}</h2>
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon"><FaSearch /></div>
+              <h3>{t('home.features.easySearch.title')}</h3>
+              <p>{t('home.features.easySearch.description')}</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon"><FaBolt /></div>
+              <h3>{t('home.features.quickBooking.title')}</h3>
+              <p>{t('home.features.quickBooking.description')}</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon"><FaHospitalAlt /></div>
+              <h3>{t('home.features.verifiedDoctors.title')}</h3>
+              <p>{t('home.features.verifiedDoctors.description')}</p>
+            </div>
+          </div>
+        </ScrollSection>
+
+        <ScrollSection id="specialties" className="specialties-section">
+          <h2>{t('home.specialties.title')}</h2>
+          <div className="specialties-grid">
+            <div className="specialty-item">
+              <span className="specialty-emoji"><FaHeartbeat /></span>
+              <span>{t('home.specialties.cardiology')}</span>
+            </div>
+            <div className="specialty-item">
+              <span className="specialty-emoji"><FaBone /></span>
+              <span>{t('home.specialties.orthopedics')}</span>
+            </div>
+            <div className="specialty-item">
+              <span className="specialty-emoji"><FaBrain /></span>
+              <span>{t('home.specialties.neurology')}</span>
+            </div>
+            <div className="specialty-item">
+              <span className="specialty-emoji"><FaBaby /></span>
+              <span>{t('home.specialties.pediatrics')}</span>
+            </div>
+            <div className="specialty-item">
+              <span className="specialty-emoji"><FaEye /></span>
+              <span>{t('home.specialties.ophthalmology')}</span>
+            </div>
+            <div className="specialty-item">
+              <span className="specialty-emoji"><FaTooth /></span>
+              <span>{t('home.specialties.dentistry')}</span>
+            </div>
+          </div>
+        </ScrollSection>
+
+        <ScrollSection id="stats" className="stats-section">
+          <h2>{t('home.stats.title')}</h2>
+          <div className="stats-grid">
+            <div className="stat-item">
+              <div className="stat-number">100+</div>
+              <div className="stat-label">{t('home.stats.doctors')}</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">10,000+</div>
+              <div className="stat-label">{t('home.stats.patients')}</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">12</div>
+              <div className="stat-label">{t('home.stats.cities')}</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">24/7</div>
+              <div className="stat-label">{t('home.stats.support')}</div>
+            </div>
+          </div>
+        </ScrollSection>
+
+        <ScrollSection id="testimonials" className="testimonials-section">
+          <h2>{t('home.testimonials.title')}</h2>
+          <div className="testimonials-grid">
+            <div className="testimonial-card">
+              <div className="testimonial-content">
+                <p>{t('home.testimonials.fatima')}</p>
+              </div>
+              <div className="testimonial-author">
+                <strong>Fatima K.</strong>
+                <span>Casablanca</span>
+              </div>
+            </div>
+            <div className="testimonial-card">
+              <div className="testimonial-content">
+                <p>{t('home.testimonials.ahmed')}</p>
+              </div>
+              <div className="testimonial-author">
+                <strong>Ahmed M.</strong>
+                <span>Marrakech</span>
+              </div>
+            </div>
+            <div className="testimonial-card">
+              <div className="testimonial-content">
+                <p>{t('home.testimonials.zineb')}</p>
+              </div>
+              <div className="testimonial-author">
+                <strong>Zineb A.</strong>
+                <span>Fez</span>
+              </div>
+            </div>
+          </div>
+        </ScrollSection>
+
+        <ScrollSection id="cta" className="cta-section">
+          <h2>{t('home.cta.title')}</h2>
+          <p>{t('home.cta.description')}</p>
           <div className="cta-buttons">
-            <Link to="/search" className="primary-btn">{t('home.hero.findDoctors')}</Link>
-            <Link to="/about" className="secondary-btn">{t('home.hero.learnMore')}</Link>
+            <Link to="/search" className="primary-btn">{t('home.cta.findDoctor')}</Link>
+            <Link to="/Signup" className="secondary-btn">{t('home.cta.createAccount')}</Link>
           </div>
-        </div>
-      </div>
+        </ScrollSection>
+      </ScrollContainer>
 
-      <div className="features-section">
-        <h2>{t('home.features.title')}</h2>
-        <div className="features-grid">
-          <div className="feature-card">
-            <div className="feature-icon"><FaSearch /></div>
-            <h3>{t('home.features.easySearch.title')}</h3>
-            <p>{t('home.features.easySearch.description')}</p>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon"><FaBolt /></div>
-            <h3>{t('home.features.quickBooking.title')}</h3>
-            <p>{t('home.features.quickBooking.description')}</p>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon"><FaHospitalAlt /></div>
-            <h3>{t('home.features.verifiedDoctors.title')}</h3>
-            <p>{t('home.features.verifiedDoctors.description')}</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="specialties-section">
-        <h2>{t('home.specialties.title')}</h2>
-        <div className="specialties-grid">
-          <div className="specialty-item">
-            <span className="specialty-emoji"><FaHeartbeat /></span>
-            <span>{t('home.specialties.cardiology')}</span>
-          </div>
-          <div className="specialty-item">
-            <span className="specialty-emoji"><FaBone /></span>
-            <span>{t('home.specialties.orthopedics')}</span>
-          </div>
-          <div className="specialty-item">
-            <span className="specialty-emoji"><FaBrain /></span>
-            <span>{t('home.specialties.neurology')}</span>
-          </div>
-          <div className="specialty-item">
-            <span className="specialty-emoji"><FaBaby /></span>
-            <span>{t('home.specialties.pediatrics')}</span>
-          </div>
-          <div className="specialty-item">
-            <span className="specialty-emoji"><FaEye /></span>
-            <span>{t('home.specialties.ophthalmology')}</span>
-          </div>
-          <div className="specialty-item">
-            <span className="specialty-emoji"><FaTooth /></span>
-            <span>{t('home.specialties.dentistry')}</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="stats-section">
-        <h2>{t('home.stats.title')}</h2>
-        <div className="stats-grid">
-          <div className="stat-item">
-            <div className="stat-number">100+</div>
-            <div className="stat-label">{t('home.stats.doctors')}</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-number">10,000+</div>
-            <div className="stat-label">{t('home.stats.patients')}</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-number">12</div>
-            <div className="stat-label">{t('home.stats.cities')}</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-number">24/7</div>
-            <div className="stat-label">{t('home.stats.support')}</div>
-          </div>
-        </div>
-      </div>
-
-      <div className="testimonials-section">
-        <h2>{t('home.testimonials.title')}</h2>
-        <div className="testimonials-grid">
-          <div className="testimonial-card">
-            <div className="testimonial-content">
-              <p>{t('home.testimonials.fatima')}</p>
-            </div>
-            <div className="testimonial-author">
-              <strong>Fatima K.</strong>
-              <span>Casablanca</span>
-            </div>
-          </div>
-          <div className="testimonial-card">
-            <div className="testimonial-content">
-              <p>{t('home.testimonials.ahmed')}</p>
-            </div>
-            <div className="testimonial-author">
-              <strong>Ahmed M.</strong>
-              <span>Marrakech</span>
-            </div>
-          </div>
-          <div className="testimonial-card">
-            <div className="testimonial-content">
-              <p>{t('home.testimonials.zineb')}</p>
-            </div>
-            <div className="testimonial-author">
-              <strong>Zineb A.</strong>
-              <span>Fez</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="cta-section">
-        <h2>{t('home.cta.title')}</h2>
-        <p>{t('home.cta.description')}</p>
-        <div className="cta-buttons">
-          <Link to="/search" className="primary-btn">{t('home.cta.findDoctor')}</Link>
-          <Link to="/Signup" className="secondary-btn">{t('home.cta.createAccount')}</Link>
-        </div>
-      </div>
-    </div>
+      <ScrollIndicator 
+        sections={sections}
+        activeSection={activeSection}
+        onDotClick={scrollToSection}
+      />
+    </>
   );
 };
 

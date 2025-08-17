@@ -388,25 +388,21 @@ body {
   }
 }
 
-/* Hero Section - Mobile First */
+/* Hero Section */
 .hero-section {
   position: relative;
-  padding: 6rem 1.5rem;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   color: white;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  will-change: background-image;
-  backface-visibility: hidden;
-  -webkit-font-smoothing: subpixel-antialiased;
-  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
 .hero-section::before {
@@ -416,78 +412,34 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    rgba(15, 76, 117, 0.3),
-    rgba(15, 76, 117, 0.5)
-  );
-  backdrop-filter: blur(2px);
+  background: linear-gradient(rgba(15, 76, 117, 0.6), rgba(15, 76, 117, 0.8));
   z-index: 1;
-  pointer-events: none;
 }
 
-.hero-section > * {
+.hero-content {
   position: relative;
   z-index: 2;
-  max-width: 90%;
+  max-width: 1200px;
   margin: 0 auto;
-  will-change: transform, opacity;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
 }
 
 .hero-section h1 {
-  font-size: 2.25rem;
+  font-size: 3rem;
   margin-bottom: 1.5rem;
   font-weight: 800;
   line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-section .description {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   margin-bottom: 2.5rem;
   line-height: 1.6;
-}
-
-/* Tablet and Desktop */
-@media (min-width: 768px) {
-  .hero-section {
-    padding: 8rem 2rem;
-  }
-  
-  .hero-section h1 {
-    font-size: 3.5rem;
-  }
-  
-  .hero-section .description {
-    font-size: 1.5rem;
-    max-width: 800px;
-  }
-  
-  .hero-section > * {
-    max-width: 1200px;
-  }
-}
-
-/* Large Desktop */
-@media (min-width: 1200px) {
-  .hero-section {
-    background-attachment: fixed;
-  }
-}
-
-/* Adjust for very small devices */
-@media (max-width: 360px) {
-  .hero-section {
-    padding: 4rem 1rem;
-  }
-  
-  .hero-section h1 {
-    font-size: 2rem;
-  }
-  
-  .hero-section .description {
-    font-size: 1rem;
-    margin-bottom: 2rem;
-  }
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .cta-buttons {
@@ -497,43 +449,10 @@ body {
   flex-wrap: wrap;
 }
 
-.primary-btn, .secondary-btn {
-  padding: 0.75rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  display: inline-block;
-}
-
-.primary-btn {
-  background: var(--secondary-color);
-  color: white;
-  border: 2px solid var(--secondary-color);
-}
-
-.primary-btn:hover {
-  background: var(--secondary-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.secondary-btn {
-  background: transparent;
-  color: white;
-  border: 2px solid white;
-}
-
-.secondary-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .hero-section {
     padding: 6rem 1.5rem;
-    min-height: 70vh;
   }
   
   .hero-section h1 {
@@ -541,94 +460,28 @@ body {
   }
   
   .hero-section .description {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 4rem 1rem;
+  }
+  
+  .hero-section h1 {
+    font-size: 2rem;
   }
   
   .cta-buttons {
     flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
+    width: 100%;
   }
   
-  .primary-btn, .secondary-btn {
+  .cta-buttons .primary-btn,
+  .cta-buttons .secondary-btn {
     width: 100%;
-    max-width: 300px;
-    padding: 0.6rem 1.5rem;
   }
-}
-
-/* Button Styles */
-.primary-btn,
-.secondary-btn {
-  padding: 1rem 2rem;
-  border-radius: var(--border-radius);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-width: 160px;
-  justify-content: center;
-}
-
-.primary-btn {
-  background: white;
-  color: var(--primary-color);
-  box-shadow: var(--shadow-lg);
-}
-
-.primary-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: var(--primary-color);
-  transition: var(--transition);
-  z-index: -1;
-}
-
-.primary-btn:hover::before {
-  left: 0;
-}
-
-.primary-btn:hover {
-  color: white;
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-xl);
-}
-
-.secondary-btn {
-  background: transparent;
-  color: white;
-  border: 2px solid white;
-}
-
-.secondary-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: white;
-  transition: var(--transition);
-  z-index: -1;
-}
-
-.secondary-btn:hover::before {
-  left: 0;
-}
-
-.secondary-btn:hover {
-  color: var(--primary-color);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-xl);
 }
 
 /* Features Section */
@@ -1320,6 +1173,80 @@ body {
   .cta-section {
     padding: 1rem 0.25rem;
   }
+}
+
+/* Button Styles */
+.primary-btn,
+.secondary-btn {
+  padding: 1rem 2rem;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 160px;
+  justify-content: center;
+}
+
+.primary-btn {
+  background: white;
+  color: var(--primary-color);
+  box-shadow: var(--shadow-lg);
+}
+
+.primary-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-color);
+  transition: var(--transition);
+  z-index: -1;
+}
+
+.primary-btn:hover::before {
+  left: 0;
+}
+
+.primary-btn:hover {
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-xl);
+}
+
+.secondary-btn {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.secondary-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: white;
+  transition: var(--transition);
+  z-index: -1;
+}
+
+.secondary-btn:hover::before {
+  left: 0;
+}
+
+.secondary-btn:hover {
+  color: var(--primary-color);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-xl);
 }
 
 /* Animation Classes */
