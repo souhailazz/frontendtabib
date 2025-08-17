@@ -568,7 +568,7 @@ body {
 
 .feature-card {
   background: white;
-  padding: 2.5rem;
+  padding: 2.5rem 1.5rem;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
   text-align: center;
@@ -576,6 +576,21 @@ body {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+
+.feature-card p {
+  color: var(--text-primary);
+  line-height: 1.7;
+  margin: 0.5rem 0 0;
+  font-size: 1.05rem;
+}
+
+.feature-card h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 1rem 0;
+  color: var(--primary-color);
 }
 
 .feature-card::before {
@@ -613,15 +628,61 @@ body {
 }
 
 .feature-card h3 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
+  margin: 1rem 0;
+  color: var(--primary-color);
 }
 
 .feature-card p {
-  color: var(--text-secondary);
-  line-height: 1.6;
+  color: var(--text-primary);
+  line-height: 1.7;
+  margin: 0.5rem 0 0;
+  font-size: 1.05rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .features-section {
+    padding: 4rem 1rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .feature-card {
+    padding: 2rem 1.5rem;
+    margin: 0 0.5rem;
+  }
+  
+  .feature-card h3 {
+    font-size: 1.3rem;
+  }
+  
+  .feature-card p {
+    font-size: 1rem;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .features-section h2 {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+    padding: 0 1rem;
+  }
+  
+  .feature-card {
+    padding: 1.75rem 1.25rem;
+    margin: 0 0.25rem;
+  }
+  
+  .feature-icon {
+    font-size: 2.5rem;
+  }
 }
 
 /* Specialties Section */
