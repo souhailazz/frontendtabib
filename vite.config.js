@@ -2,13 +2,20 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
+import svgr from 'vite-plugin-svgr';
 
-// https://vite.dev/config/
-export default defineConfig({
+// https://vitejs.dev/config/
+export default defineConfig(({ mode }) => ({
   plugins: [
-    react(),
+    react({
+      jsxImportSource: '@emotion/react',
+      babel: {
+        plugins: ['@emotion/babel-plugin'],
+      },
+    }),
+    svgr(),
     visualizer({
-      open: process.env.NODE_ENV !== 'production',
+      open: mode !== 'production',
       filename: 'bundle-analyzer-report.html',
     }),
     ViteImageOptimizer({
@@ -19,45 +26,57 @@ export default defineConfig({
     }),
   ],
   build: {
-    sourcemap: true,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          react: ['react', 'react-dom', 'react-router-dom', 'react-i18next'],
-          vendor: ['date-fns', 'lodash', 'axios'],
-          ui: ['@chakra-ui/react', 'framer-motion'],
-        },
-      },
-    },
-    chunkSizeWarningLimit: 1000,
+    sourcemap: mode !== 'production',
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true,
-        drop_debugger: true,
+        drop_console: mode === 'production',
+        drop_debugger: mode === 'production',
       },
       format: {
         comments: false,
       },
     },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom', 'react-i18next'],
+          vendor: ['date-fns', 'lodash', 'axios', 'i18next'],
+          ui: ['@mui/material', '@emotion/react', '@emotion/styled'],
+          charts: ['recharts', 'leaflet', 'react-leaflet'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
   },
   server: {
     port: 3000,
     strictPort: true,
+    open: true,
   },
   preview: {
     port: 3000,
     strictPort: true,
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
+    include: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      '@mui/material',
+      '@emotion/react',
+      '@emotion/styled',
+    ],
     esbuildOptions: {
-      // Target modern browsers
       target: 'es2020',
     },
   },
   esbuild: {
-    // Remove console.log in production
-    drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
+    logOverride: { 'this-is-undefined-in-esm': 'silent' },
   },
-});
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
+  },
+}));
