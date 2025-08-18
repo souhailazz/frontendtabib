@@ -8,12 +8,9 @@ const api = axios.create({
   baseURL: API_BASE_URL,
 });
 
-// Request interceptor to handle different auth approaches
 api.interceptors.request.use((config) => {
-  const userType = localStorage.getItem('userType');
-  
-  // Only set credentials for patients (session-based auth)
-  if (userType === 'patient') {
+  const userType = sessionStorage.getItem('userType');
+    if (userType === 'patient') {
     config.withCredentials = true;
   } else {
     config.withCredentials = false;
@@ -27,11 +24,11 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401 || error.response?.status === 404) {
-      // Clear localStorage on auth failure
-      localStorage.removeItem('userId');
-      localStorage.removeItem('userType');
-      localStorage.removeItem('userEmail');
-      localStorage.removeItem('userName');
+      // Clear sessionStorage on auth failure
+      sessionStorage.removeItem('userId');
+      sessionStorage.removeItem('userType');
+      sessionStorage.removeItem('userEmail');
+      sessionStorage.removeItem('userName');
       
       // Redirect to login (you might want to use a callback for this)
       if (typeof window !== 'undefined') {

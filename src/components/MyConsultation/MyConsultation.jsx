@@ -33,8 +33,8 @@ const MyConsultation = () => {
   const consultationsRef = useRef([]);
   const selectedConsultationRef = useRef(null);
  
-  const userId = localStorage.getItem('userId');
-  const userType = localStorage.getItem('userType');
+  const userId = sessionStorage.getItem('userId');
+  const userType = sessionStorage.getItem('userType');
  
   const safeText = (value, fallback = 'N/A') => (value && value.trim() !== '' ? value : fallback);
  

@@ -185,8 +185,8 @@ export default function BookingModal({ doctor, onClose, onConfirm }) {
     setError("");
 
     try {
-      const userEmail = localStorage.getItem("userEmail");
-      const userName = localStorage.getItem("userName");
+      const userEmail = sessionStorage.getItem("userEmail");
+      const userName = sessionStorage.getItem("userName");
       if (!userEmail || !userName) {
         setError("User information missing. Please log in again.");
         setIsLoading(false);

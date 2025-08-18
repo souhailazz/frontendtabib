@@ -20,7 +20,6 @@ const Dashboard = () => {
   // API fetching functions
   const fetchData = async () => {
     try {
-      console.log('Current userType from localStorage:', userType); // Debug log
       
       if (!userType || userType.toLowerCase() !== 'docteur') {
         console.error('Access denied - userType is not "docteur". Current userType:', userType);
@@ -28,7 +27,6 @@ const Dashboard = () => {
       }
   
       if (!userId) {
-        console.error('No userId found in localStorage');
         throw new Error(t('dashboard.error.userIdNotFound'));
       }
       const [doctorRes, consultationsRes, ordonnancesRes] = await Promise.all([
