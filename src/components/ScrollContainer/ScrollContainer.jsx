@@ -1,67 +1,48 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useRef, forwardRef } from 'react';
 import './ScrollContainer.css';
 
 export const ScrollContainer = forwardRef(({ children, onSectionChange }, ref) => {
   const containerRef = useRef();
-  const sections = [];
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     const handleScroll = () => {
+      if (!onSectionChange) return;
+      
       const containerRect = container.getBoundingClientRect();
       const containerTop = containerRect.top;
-      const containerHeight = containerRect.height;
-      const scrollPosition = -containerTop + containerHeight * 0.4; // 40% from top
+      const scrollPosition = container.scrollTop;
 
       // Find the active section
       let activeIndex = 0;
-      sections.forEach((section, index) => {
-        if (!section) return;
-        const sectionRect = section.getBoundingClientRect();
-        const sectionTop = sectionRect.top - containerTop;
-        const sectionBottom = sectionTop + sectionRect.height;
+      container.childNodes.forEach((child, index) => {
+        if (!child) return;
+        const childRect = child.getBoundingClientRect();
+        const childTop = childRect.top - containerTop;
         
-        if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+        if (scrollPosition >= childTop) {
           activeIndex = index;
         }
       });
 
-      if (onSectionChange) {
-        onSectionChange(activeIndex);
-      }
+      onSectionChange(activeIndex);
     };
 
-    container.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
+    container.addEventListener('scroll', handleScroll);
     
     // Initial check
     handleScroll();
     
     return () => {
       container.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
     };
-  }, [onSectionChange, sections]);
-
-  // Clone children to add refs
-  const childrenWithRefs = children.map((child, index) => {
-    return (
-      <div 
-        key={index} 
-        ref={el => sections[index] = el}
-        className="scroll-section"
-      >
-        {child}
-      </div>
-    );
-  });
+  }, [onSectionChange]);
 
   return (
     <div 
-      ref={(node) => {
+      ref={node => {
         containerRef.current = node;
         if (ref) {
           if (typeof ref === 'function') {
@@ -73,24 +54,21 @@ export const ScrollContainer = forwardRef(({ children, onSectionChange }, ref) =
       }}
       className="scroll-container"
     >
-      {childrenWithRefs}
+      {children}
     </div>
   );
 });
 
-// For backward compatibility
-export const ScrollSection = ({ children, className = '' }) => {
-  return (
-    <div className={`scroll-section-wrapper ${className}`}>
+export const ScrollSection = ({ children, className = '' }) => (
+  <div className={`scroll-section ${className}`}>
+    <div className="scroll-section-wrapper">
       {children}
     </div>
-  );
-};
+  </div>
+);
 
-export const ScrollContent = ({ children }) => {
-  return (
-    <div className="scroll-content-inner">
-      {children}
-    </div>
-  );
-};
+export const ScrollContent = ({ children }) => (
+  <div className="scroll-content-inner">
+    {children}
+  </div>
+);

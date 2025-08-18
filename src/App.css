@@ -35,7 +35,8 @@ body {
 main {
   flex: 1 0 auto;
   width: 100%;
-  padding-bottom: 2rem;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 /* CSS Variables for Medical/Healthcare Theming */
