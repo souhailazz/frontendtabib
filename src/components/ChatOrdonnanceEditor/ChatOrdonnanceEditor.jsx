@@ -8,7 +8,7 @@ const ChatOrdonnanceEditor = ({ consultationId, onClose }) => {
   useEffect(() => {
     const loadOrdonnance = async () => {
       try {
-        const res = await axios.get(`https://tabiblife.zeabur.app/api/ordonnances/consultation/${consultationId}`);
+        const res = await axios.get(`https://tabib.zeabur.app/api/ordonnances/consultation/${consultationId}`);
         setOrdonnance(res.data);
         setContenu(res.data.contenu);
       } catch (error) {
@@ -20,7 +20,7 @@ const ChatOrdonnanceEditor = ({ consultationId, onClose }) => {
 
   const updateOrdonnance = async () => {
     try {
-      await axios.put(`https://tabiblife.zeabur.app/api/ordonnances/${ordonnance.id}`, {
+      await axios.put(`https://tabib.zeabur.app/api/ordonnances/${ordonnance.id}`, {
         ...ordonnance,
         contenu,
       });

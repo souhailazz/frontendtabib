@@ -98,7 +98,7 @@ export default function ResponseSearch() {
       }
 
       try {
-        const apiUrl = `https://tabiblife.zeabur.app/api/docteurs/search?${searchParams.toString()}`;
+        const apiUrl = `https://tabib.zeabur.app/api/docteurs/search?${searchParams.toString()}`;
         
         const response = await fetch(apiUrl, {
           method: "GET",

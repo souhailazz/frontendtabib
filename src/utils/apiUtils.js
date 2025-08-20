@@ -1,7 +1,7 @@
 // utils/apiUtils.js
 import axios from 'axios';
 
-const API_BASE_URL = 'https://tabiblife.zeabur.app/api';
+const API_BASE_URL = 'https://tabib.zeabur.app/api';
 
 // Create axios instance with default config
 const api = axios.create({

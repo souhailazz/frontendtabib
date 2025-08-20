@@ -164,10 +164,10 @@ const Admin = () => {
     try {
       setLoading(true);
       const [patientsRes, doctorsRes, consultationsRes, paymentsRes] = await Promise.all([
-        fetch('https://tabiblife.zeabur.app/api/admin/patients'),
-        fetch('https://tabiblife.zeabur.app/api/admin/doctors'),
-        fetch('https://tabiblife.zeabur.app/api/admin/consultations'),
-        fetch('https://tabiblife.zeabur.app/api/admin/payments')
+        fetch('https://tabib.zeabur.app/api/admin/patients'),
+        fetch('https://tabib.zeabur.app/api/admin/doctors'),
+        fetch('https://tabib.zeabur.app/api/admin/consultations'),
+        fetch('https://tabib.zeabur.app/api/admin/payments')
       ]);
 
       if (!patientsRes.ok || !doctorsRes.ok || !consultationsRes.ok || !paymentsRes.ok) {
@@ -261,7 +261,7 @@ const Admin = () => {
         };
       }
       
-      const response = await fetch(`https://tabiblife.zeabur.app${endpoint}`, {
+      const response = await fetch(`https://tabib.zeabur.app${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dataToSend)
@@ -285,7 +285,7 @@ const Admin = () => {
                       editMode === 'consultation' ? `/api/admin/consultations/${selectedItem.id}` :
                       `/api/admin/payments/${selectedItem.paymentId}`;
       
-      const response = await fetch(`https://tabiblife.zeabur.app${endpoint}`, {
+      const response = await fetch(`https://tabib.zeabur.app${endpoint}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -309,7 +309,7 @@ const Admin = () => {
                       editMode === 'consultation' ? `/api/admin/consultations/${selectedItem.id}` :
                       `/api/admin/payments/${selectedItem.paymentId}`;
       
-      const response = await fetch(`https://tabiblife.zeabur.app${endpoint}`, {
+      const response = await fetch(`https://tabib.zeabur.app${endpoint}`, {
         method: 'DELETE'
       });
 

@@ -62,8 +62,8 @@ const handleSubmit = async (e) => {
           }
 
     const url = userType === "patient"
-      ? "https://tabiblife.zeabur.app/api/patients/login"
-      : "https://tabiblife.zeabur.app/api/docteurs/login"
+      ? "https://tabib.zeabur.app/api/patients/login"
+      : "https://tabib.zeabur.app/api/docteurs/login"
 
     const response = await fetch(url, {
       method: "POST",

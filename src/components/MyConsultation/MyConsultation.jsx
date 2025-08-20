@@ -56,7 +56,7 @@ const MyConsultation = () => {
  
     setLoadingOrdonnance(true);
     try {
-      const response = await axios.get(`https://tabiblife.zeabur.app/api/ordonnances/consultation/${consultationId}`);
+      const response = await axios.get(`https://tabib.zeabur.app/api/ordonnances/consultation/${consultationId}`);
       setLoadingOrdonnance(false);
       return response.data;
     } catch (error) {
@@ -75,8 +75,8 @@ const MyConsultation = () => {
     }
  
     const url = userType === 'patient'
-      ? `https://tabiblife.zeabur.app/api/consultations/patient/${userId}`
-      : `https://tabiblife.zeabur.app/api/consultations/doctor/${userId}`;
+      ? `https://tabib.zeabur.app/api/consultations/patient/${userId}`
+      : `https://tabib.zeabur.app/api/consultations/doctor/${userId}`;
  
     try {
       const response = await axios.get(`${url}?t=${Date.now()}`, { 
@@ -147,7 +147,7 @@ const MyConsultation = () => {
  
       if (patientId && doctorId) {
         axios
-          .get(`https://tabiblife.zeabur.app/api/messages/between?docteurId=${doctorId}&patientId=${patientId}`)
+          .get(`https://tabib.zeabur.app/api/messages/between?docteurId=${doctorId}&patientId=${patientId}`)
           .then((res) => setMessages(res.data))
           .catch((err) => {
             console.error('Error loading messages:', err);
@@ -262,7 +262,7 @@ const MyConsultation = () => {
           dateConsultation: new Date().toISOString()
         };
  
-        const res = await axios.post('https://tabiblife.zeabur.app/api/consultations', newConsultation);
+        const res = await axios.post('https://tabib.zeabur.app/api/consultations', newConsultation);
         consultation = res.data;
         setConsultations((prev) => [...prev, consultation]);
         setSelectedConsultation(consultation);
@@ -313,7 +313,7 @@ const MyConsultation = () => {
             ordonnanceId = ordonnance.id;
           } else {
             // Create new ordonnance only if one doesn't exist
-            const ordonnanceResponse = await axios.post(`https://tabiblife.zeabur.app/api/ordonnances`, ordonnancePayload);
+            const ordonnanceResponse = await axios.post(`https://tabib.zeabur.app/api/ordonnances`, ordonnancePayload);
             console.log('Ordonnance creation response:', ordonnanceResponse.data);
  
             if (!ordonnanceResponse.data || !ordonnanceResponse.data.id) {
@@ -357,7 +357,7 @@ const MyConsultation = () => {
  
       console.log('Message DTO:', dto);
  
-      const res = await axios.post('https://tabiblife.zeabur.app/api/messages', dto);
+      const res = await axios.post('https://tabib.zeabur.app/api/messages', dto);
       setMessages((prev) => [...prev, res.data]);
       setMessage('');
     } catch (err) {
@@ -407,7 +407,7 @@ const MyConsultation = () => {
   const handleEditOrdonnance = async (ordonnanceId, content) => {
     try {
       setIsEditingOrdonnance(true);
-      const response = await axios.put(`https://tabiblife.zeabur.app/api/ordonnances/${ordonnanceId}`, {
+      const response = await axios.put(`https://tabib.zeabur.app/api/ordonnances/${ordonnanceId}`, {
         contenu: content,
         status: 'active'
       });
@@ -450,7 +450,7 @@ const MyConsultation = () => {
  
   const handleUpdateConsultationStatus = async (consultationId, newStatus) => {
     try {
-      const response = await axios.put(`https://tabiblife.zeabur.app/api/consultations/${consultationId}/status?status=${newStatus}`);
+      const response = await axios.put(`https://tabib.zeabur.app/api/consultations/${consultationId}/status?status=${newStatus}`);
       if (response.data) {
         // Immediately fetch fresh consultation data to ensure real-time updates
         await fetchConsultations();
