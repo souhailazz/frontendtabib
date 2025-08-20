@@ -109,15 +109,15 @@
   width: 100%;
   min-height: 100vh;
   padding: 1.5rem;
-  background-color: var(--bg-primary); /* same as content */
-  background-image: none; /* remove radial gradients if not needed */
+  background-color: var(--bg-primary); /* match content background */
+  background-image: none; /* remove orange gradient */
 }
-
 .dashboard-content {
   width: 100%;
-  max-width: 100%; /* allow it to take full width */
-  margin: 0;       /* remove side margins */
-  border-radius: 0; /* optional: keep square corners instead of rounded */
+  max-width: 100%; 
+  margin: 0;       
+  border-radius: 0; 
+  box-shadow: none; 
 }
 
 .dashboard-layout {
