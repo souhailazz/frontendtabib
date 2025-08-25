@@ -30,9 +30,9 @@ const Dashboard = () => {
         throw new Error(t('dashboard.error.userIdNotFound'));
       }
       const [doctorRes, consultationsRes, ordonnancesRes] = await Promise.all([
-        fetch(`https://tabib.zeabur.app/api/docteurs/${userId}`),
-        fetch(`https://tabib.zeabur.app/api/consultations/doctor/${userId}`),
-        fetch(`https://tabib.zeabur.app/api/ordonnances/doctor/${userId}`)
+        fetch(`https://api.tabib.life/api/docteurs/${userId}`),
+        fetch(`https://api.tabib.life/api/consultations/doctor/${userId}`),
+        fetch(`https://api.tabib.life/api/ordonnances/doctor/${userId}`)
       ]);
 
       if (!doctorRes.ok) {

@@ -31,7 +31,7 @@ const Profiles = () => {
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
   const isDoctor = userType === 'docteur';
-  const apiBaseUrl = 'https://tabib.zeabur.app/api';
+  const apiBaseUrl = 'https://api.tabib.life/api';
 
   const profileEndpoint = isDoctor ? `/docteurs/${userId}` : `/patients/${userId}`;
 

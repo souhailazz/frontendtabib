@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
     // For patients, validate with server session using userId endpoint instead of /me
     if (storedUserType === 'patient') {
       try {
-        const response = await fetch(`https://tabib.zeabur.app/api/patients/${storedUserId}`, {
+        const response = await fetch(`https://api.tabib.life/api/patients/${storedUserId}`, {
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -114,7 +114,7 @@ export const AuthProvider = ({ children }) => {
     // Clear server session only for patients
     if (userType === 'patient') {
       try {
-        await fetch('https://tabib.zeabur.app/api/patients/logout', {
+        await fetch('https://api.tabib.life/api/patients/logout', {
           method: 'POST',
           credentials: 'include',
           headers: {

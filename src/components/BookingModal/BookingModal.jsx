@@ -125,7 +125,7 @@ export default function BookingModal({ doctor, onClose, onConfirm }) {
       return;
     }
 
-    fetch(`https://tabib.zeabur.app/api/consultations/doctor/${doctor.id}`)
+    fetch(`https://api.tabib.life/api/consultations/doctor/${doctor.id}`)
       .then((res) => res.json())
       .then((consultations) => {
         const booked = consultations
@@ -204,7 +204,7 @@ export default function BookingModal({ doctor, onClose, onConfirm }) {
         totalPrice: totalPrice,
       };
 
-      const response = await fetch("https://tabib.zeabur.app/api/consultations", {
+      const response = await fetch("https://api.tabib.life/api/consultations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(consultationPayload),
