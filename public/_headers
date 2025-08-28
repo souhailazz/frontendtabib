@@ -1,0 +1,89 @@
+# ==============================
+# 🔐 Global Security Headers
+# ==============================
+/*
+  # Protection contre le clickjacking
+  X-Frame-Options: DENY
+
+  # Empêche le sniffing de type MIME
+  X-Content-Type-Options: nosniff
+
+  # Politique de confidentialité et analytics
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Permissions API (empêche l'accès à la caméra, micro, etc.)
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
+
+  # Améliore le rendu DNS
+  X-DNS-Prefetch-Control: on
+
+  # Sécurité navigateur moderne (isolation)
+  Cross-Origin-Resource-Policy: same-origin
+  Cross-Origin-Opener-Policy: same-origin
+
+  # HSTS (forcer HTTPS sur 1 an + sous-domaines + preload)
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # Content Security Policy (CSP) - ajustée à ton app
+  Content-Security-Policy:
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://maps.googleapis.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    img-src 'self' data: https:;
+    font-src 'self' https://fonts.gstatic.com;
+    connect-src 'self' https://api.tabib.life https://www.google-analytics.com;
+    frame-src 'self' https://www.google.com https://www.youtube.com;
+    media-src 'self';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';
+    upgrade-insecure-requests;
+
+# ==============================
+# 📦 Cache Control (Performance)
+# ==============================
+
+# JS / CSS → cache 1 an, immutable
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images / Fonts → cache 1 an
+/*.png
+/*.jpg
+/*.jpeg
+/*.gif
+/*.svg
+/*.webp
+/*.woff
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML → no cache (toujours frais)
+/*.html
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
+
+# ==============================
+# 🌐 API Routes (CORS)
+# ==============================
+/api/*
+  Access-Control-Allow-Origin: https://tabib.life
+  Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization
+  Access-Control-Allow-Credentials: true
+
+# ==============================
+# 🤖 Sitemap & Robots
+# ==============================
+/sitemap.xml
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/robots.txt
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400

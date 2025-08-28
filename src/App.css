@@ -258,6 +258,65 @@ body {
   box-shadow: var(--shadow-md);
 }
 
+/* Logo Styles */
+.logo-container {
+  display: flex;
+  align-items: center;
+  height: 60px; /* Fixed height for the header */
+}
+
+.logo-link {
+  display: inline-block;
+  line-height: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 34px; /* Slightly smaller default size */
+  width: auto;
+  max-width: 200px; /* Prevent logo from becoming too wide */
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .logo {
+    height: 32px;
+  }
+}
+
+@media (max-width: 780px) {
+  .logo {
+    height: 30px;
+  }
+  
+  .app-header {
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    height: 26px;
+  }
+}
+
+/* Hover effect */
+.logo-link:hover .logo {
+  transform: scale(1.05);
+}
+
+/* Ensure the header has proper spacing */
+.app-header {
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .logo-container {
   display: flex;
   align-items: center;
@@ -275,10 +334,13 @@ body {
 }
 
 .logo {
-  height: 40px;
+  height: 50px;        /* keeps header height compact */
   width: auto;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
   transition: var(--transition);
+  transform: scale(2);         /* zoom the image visually */
+  transform-origin: center;      /* keep it centered */
+  margin-left: 30px;  /* pushes it a bit to the right */
 }
 
 .main-nav {

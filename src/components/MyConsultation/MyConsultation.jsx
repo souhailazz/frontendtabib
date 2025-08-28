@@ -66,7 +66,6 @@ const MyConsultation = () => {
     }
   };
  
-  // Memoized function to fetch consultations
   const fetchConsultations = useCallback(async () => {
     if (!userId || !userType) {
       setError(t('myConsultation.error.userSessionNotFound'));

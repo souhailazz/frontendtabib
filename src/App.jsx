@@ -285,7 +285,11 @@ const AppContent = () => {
       <header className="app-header">
         <div className="logo-container">
           <Link to="/" className="logo-link">
-            <img src="/logo.svg" alt="Tabib.life logo" className="logo" style={{ height: '40px', verticalAlign: 'middle' }} />
+          <img 
+  src="/logo.png" 
+  alt="Tabib.life logo" 
+  className="logo"
+/>
           </Link>
         </div>
         {/* Hamburger menu for mobile */}
