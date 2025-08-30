@@ -1,6 +1,6 @@
 import React from 'react';
-import { SEO } from '../SEO/SEO';
 import { FaExclamationTriangle, FaStethoscope, FaUserMd, FaInfoCircle } from 'react-icons/fa';
+import PageMeta from '../SEO/PageMeta';
 import './LegalPages.css';
 
 const MedicalDisclaimer = () => {
@@ -10,10 +10,14 @@ const MedicalDisclaimer = () => {
 
   return (
     <>
-      <SEO 
+      <PageMeta 
         title={pageTitle}
         description={pageDescription}
-        path="/medical-disclaimer/"
+        keywords="avertissement médical, mise en garde médicale, non-responsabilité médicale, informations médicales, plateforme de santé"
+        ogTitle={`${pageTitle} | Tabib Life`}
+        ogDescription={pageDescription}
+        ogImage="https://tabib.life/logo.png"
+        ogUrl="https://tabib.life/medical-disclaimer"
       />
       
       <div className="legal-document">

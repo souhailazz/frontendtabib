@@ -1,7 +1,7 @@
 import React from 'react';
-import { SEO } from '../SEO/SEO';
 import { useTranslation } from 'react-i18next';
 import { FaShieldAlt, FaUserLock, FaDatabase, FaCookieBite, FaUserCog, FaEnvelope } from 'react-icons/fa';
+import PageMeta from '../SEO/PageMeta';
 import './LegalPages.css';
 
 const PrivacyPolicy = () => {
@@ -12,10 +12,14 @@ const PrivacyPolicy = () => {
 
   return (
     <>
-      <SEO 
+      <PageMeta 
         title={pageTitle}
         description={pageDescription}
-        path="/privacy-policy/"
+        keywords="politique de confidentialité, protection des données, RGPD, vie privée, données personnelles, confidentialité médicale"
+        ogTitle={`${pageTitle} | Tabib Life`}
+        ogDescription={pageDescription}
+        ogImage="https://tabib.life/logo.png"
+        ogUrl="https://tabib.life/privacy-policy"
       />
       
       <div className="legal-document">

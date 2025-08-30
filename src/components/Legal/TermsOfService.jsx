@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { SEO } from '../SEO/SEO';
 import { FaGavel, FaUserMd, FaExclamationTriangle, FaBook, FaInfoCircle } from 'react-icons/fa';
+import PageMeta from '../SEO/PageMeta';
 import './LegalPages.css';
 
 const TermsOfService = () => {
@@ -12,10 +12,14 @@ const TermsOfService = () => {
 
   return (
     <>
-      <SEO 
+      <PageMeta 
         title={pageTitle}
         description={pageDescription}
-        path="/terms-of-service/"
+        keywords="conditions générales d'utilisation, CGU, conditions d'utilisation, mentions légales, conditions de service"
+        ogTitle={`${pageTitle} | Tabib Life`}
+        ogDescription={pageDescription}
+        ogImage="https://tabib.life/logo.png"
+        ogUrl="https://tabib.life/terms-of-service"
       />
       
       <div className="legal-document">
