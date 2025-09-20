@@ -1,35 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
   <!-- Homepage -->
   <url>
     <loc>https://tabib.life/</loc>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://tabib.life/logo.webp</image:loc>
+      <image:title>Tabib Life Logo</image:title>
+      <image:caption>Tabib Life - Rendez-vous médicaux en ligne au Maroc</image:caption>
+    </image:image>
   </url>
 
   <!-- Main Pages -->
   <url>
     <loc>https://tabib.life/search</loc>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://tabib.life/about</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://tabib.life/logo.webp</image:loc>
+      <image:title>Recherche de médecins</image:title>
+    </image:image>
   </url>
 
   <!-- Authentication -->
   <url>
     <loc>https://tabib.life/signup</loc>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://tabib.life/login</loc>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -37,45 +48,46 @@
   <!-- User Pages -->
   <url>
     <loc>https://tabib.life/myconsultation</loc>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://tabib.life/dashboard</loc>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://tabib.life/pricing</loc>
-    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Legal -->
   <url>
     <loc>https://tabib.life/privacy-policy</loc>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://tabib.life/terms-of-service</loc>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://tabib.life/medical-disclaimer</loc>
+    <lastmod>2025-09-03</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.5</priority>
   </url>
 
-  <!-- Error -->
+  <!-- Additional Pages -->
   <url>
-    <loc>https://tabib.life/404</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.1</priority>
+    <loc>https://tabib.life/response-search</loc>
+    <lastmod>2025-09-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
   </url>
+
 </urlset>

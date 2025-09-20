@@ -18,7 +18,7 @@ const PrivacyPolicy = () => {
         keywords="politique de confidentialité, protection des données, RGPD, vie privée, données personnelles, confidentialité médicale"
         ogTitle={`${pageTitle} | Tabib Life`}
         ogDescription={pageDescription}
-        ogImage="https://tabib.life/logo.png"
+        ogImage="https://tabib.life/logo.webp"
         ogUrl="https://tabib.life/privacy-policy"
       />
       

@@ -13,6 +13,15 @@ const resources = {
       'nav.about': 'About',
       'nav.login': 'Login',
       'nav.logout': 'Logout',
+      
+      // Common
+      'common.previous': 'Previous',
+      'common.next': 'Next',
+      'common.hide': 'Hide',
+      'common.show': 'Show',
+      'common.help': 'Help',
+      'common.error.invalidEmail': 'Please enter a valid email address',
+      'common.error.invalidPhone': 'Please enter a valid phone number (10-15 digits)',
 
       // Home page
       'home.hero.title': 'Tabib Healthcare Platform',
@@ -78,6 +87,7 @@ const resources = {
       'search.title': 'Search for Doctors',
       'search.city.label': 'City',
       'search.city.placeholder': 'Select city',
+      'search.subtitle': 'Find the best doctors in Morocco',
       'search.specialty.label': 'Specialty',
       'search.subtitle': 'Find the best doctors in Morocco',
       'search.specialty.placeholder': 'Select specialty',
@@ -190,9 +200,29 @@ const resources = {
       'signup.error.passwordsNotMatch': 'Passwords do not match',
       'signup.error.required': 'Please fill in all fields',
       'signup.error.professionalNumberRequired': 'Professional Number is required for doctor registration',
+      'signup.error.professionalNumberFormat': 'Professional Number must be 8 digits',
       'signup.error.cityRequired': 'Please select a city',
       'signup.error.general': '{{userType}} signup failed. Please check your information.',
-
+      'signup.error.passwordTooShort': 'Password must be at least 6 characters',
+      
+      // Signup Steps
+      'signup.step.personalInfo': 'Personal Info',
+      'signup.step.contactInfo': 'Contact Info',
+      'signup.step.medicalInfo': 'Medical Info',
+      'signup.step.professionalInfo': 'Professional Info',
+      
+      // Signup Tooltips
+      'signup.tooltip.firstName': 'Enter your first name as it appears on your ID',
+      'signup.tooltip.lastName': 'Enter your last name as it appears on your ID',
+      'signup.tooltip.email': 'We will send a confirmation email to this address',
+      'signup.tooltip.phone': 'Enter your mobile number for appointment notifications',
+      'signup.tooltip.address': 'Your full address for location-based services',
+      'signup.tooltip.birthDate': 'Your date of birth for age verification',
+      'signup.tooltip.socialSecurity': 'Your social security number for insurance purposes',
+      'signup.tooltip.medicalHistory': 'Any relevant medical conditions or allergies',
+      'signup.tooltip.professionalNumber': 'Your 8-digit professional license number',
+      'signup.tooltip.specialty': 'Your medical specialty for patient matching',
+      'signup.tooltip.hospital': 'Your primary hospital affiliation',
       // Dashboard Component
       'dashboard.title': 'Doctor Dashboard',
       'dashboard.welcome': 'Welcome back,',
@@ -230,6 +260,12 @@ const resources = {
       'dashboard.metrics.videoConsultations': 'Video consultations',
       'dashboard.metrics.completed': 'Completed',
       'dashboard.metrics.pending': 'Pending',
+      'dashboard.metricTitles.totalConsultations': 'Total Consultations',
+      'dashboard.metricTitles.prescriptionsIssued': 'Prescriptions Issued',
+      'dashboard.metricTitles.averageRating': 'Average Rating',
+      'dashboard.metricTitles.videoConsultations': 'Video Consultations',
+      'dashboard.metricTitles.completedConsultations': 'Completed Consultations',
+      'dashboard.metricTitles.pendingConsultations': 'Pending Consultations',
       'dashboard.consultations.title': 'Consultations',
       'dashboard.consultations.noConsultations': 'No consultations found',
       'dashboard.consultations.noReasonProvided': 'No reason provided',
@@ -237,12 +273,6 @@ const resources = {
       'dashboard.consultations.status.accepted': 'Accepted',
       'dashboard.consultations.status.completed': 'Completed',
       'dashboard.consultations.status.cancelled': 'Cancelled',
-      'dashboard.metricTitles.totalConsultations': 'Total Consultations',
-      'dashboard.metricTitles.prescriptionsIssued': 'Prescriptions Issued',
-      'dashboard.metricTitles.averageRating': 'Average Rating',
-      'dashboard.metricTitles.videoConsultations': 'Video Consultations',
-      'dashboard.metricTitles.completedConsultations': 'Completed Consultations',
-      'dashboard.metricTitles.pendingConsultations': 'Pending Consultations',
       'dashboard.recentPrescriptions.title': 'Recent Prescriptions',
       'dashboard.charts.consultationStatus.title': 'Consultation Status Distribution',
       'dashboard.charts.weeklyPattern.title': 'Weekly Consultation Pattern',
@@ -439,6 +469,8 @@ const resources = {
       'common.previous': 'Previous',
       'common.show': 'Show',
       'common.hide': 'Hide',
+      'common.error.invalidEmail': 'Please enter a valid email address',
+      'common.error.invalidPhone': 'Please enter a valid phone number (10-15 digits)',
 
       // Search feature
       'search.feature.easy': 'Easy Search',
@@ -459,6 +491,15 @@ const resources = {
       'nav.about': 'À Propos',
       'nav.login': 'Connexion',
       'nav.logout': 'Déconnexion',
+      
+      // Common
+      'common.previous': 'Précédent',
+      'common.next': 'Suivant',
+      'common.hide': 'Masquer',
+      'common.show': 'Afficher',
+      'common.help': 'Aide',
+      'common.error.invalidEmail': 'Veuillez entrer une adresse email valide',
+      'common.error.invalidPhone': 'Veuillez entrer un numéro de téléphone valide (10-15 chiffres)',
 
       // Home page
       'home.hero.title': 'Plateforme de Santé Tabib',
@@ -636,8 +677,30 @@ const resources = {
       'signup.error.passwordsNotMatch': 'Les mots de passe ne correspondent pas',
       'signup.error.required': 'Veuillez remplir tous les champs',
       'signup.error.professionalNumberRequired': 'Numéro professionnel requis pour l\'inscription en tant que médecin',
+      'signup.error.professionalNumberFormat': 'Numéro professionnel doit avoir 8 chiffres',
       'signup.error.cityRequired': 'Veuillez sélectionner une ville',
       'signup.error.general': '{{userType}} inscription échouée. Veuillez vérifier vos informations.',
+      'signup.error.passwordTooShort': 'Le mot de passe doit contenir au moins 6 caractères',
+      
+      // Signup Steps
+      'signup.step.personalInfo': 'Personal Info',
+      'signup.step.contactInfo': 'Contact Info',
+      'signup.step.medicalInfo': 'Medical Info',
+      'signup.step.professionalInfo': 'Professional Info',
+      
+      // Signup Tooltips
+      'signup.tooltip.firstName': 'Entrez votre prénom comme il figure sur votre ID',
+      'signup.tooltip.lastName': 'Entrez votre nom de famille comme il figure sur votre ID',
+      'signup.tooltip.email': 'Nous vous enverrons une email de confirmation à cet adresse',
+      'signup.tooltip.phone': 'Entrez votre numéro de mobile pour recevoir les rappels d\'appointements',
+      'signup.tooltip.address': 'Votre adresse complète pour les services basés sur votre localisation',
+      'signup.tooltip.birthDate': 'Votre date de naissance pour vérifier votre âge',
+      'signup.tooltip.socialSecurity': 'Votre numéro de sécurité sociale pour la prestation assurancier',
+      'signup.tooltip.medicalHistory': 'Toute conditions médicas importantes ou allergies',
+      'signup.tooltip.professionalNumber': 'Votre numéro de licence de travail professionelle composé de 8 chiffres',
+      'signup.tooltip.specialty': 'Votre spécialité médical pour être couplée correctement',
+      'signup.tooltip.hospital': 'Votre affiliation hopitablele primarye',
+
 
       // Dashboard Component
       'dashboard.title': 'Tableau de Bord Médecin',
@@ -888,6 +951,8 @@ const resources = {
       'common.previous': 'Précédent',
       'common.show': 'Afficher',
       'common.hide': 'Masquer',
+      'common.error.invalidEmail': 'Veuillez entrer une adresse email valide',
+      'common.error.invalidPhone': 'Veuillez entrer un numéro de téléphone valide (10-15 chiffres)',
 
       // Search feature
       'search.feature.easy': 'Recherche Facile',
@@ -895,7 +960,20 @@ const resources = {
       'search.feature.verified': 'Médecins Vérifiés',
       'search.feature.verifiedDesc': 'Tous les professionnels sont agréés et vérifiés',
       'search.feature.locations': 'Emplacements Multiples',
-      'search.feature.locationsDesc': 'Disponible dans les grandes villes du Maroc'
+      'search.feature.locationsDesc': 'Disponible dans les grandes villes du Maroc',
+
+      // CAPTCHA
+      'captcha.label': 'CAPTCHA',
+      'captcha.placeholder': 'Entrez la réponse',
+      'captcha.verify': 'Vérifier',
+      'captcha.refresh': 'Actualiser le CAPTCHA',
+      'captcha.success': 'CAPTCHA vérifié avec succès!',
+      'captcha.error': 'Réponse CAPTCHA incorrecte. Veuillez réessayer.',
+      'captcha.required': 'Veuillez résoudre le CAPTCHA avant de soumettre',
+
+      // Rate limiting
+      'rateLimit.error': 'Trop de tentatives. Veuillez réessayer dans {{time}}.',
+      'rateLimit.blocked': 'Trop de tentatives de création de compte. Veuillez réessayer plus tard.'
     }
   }
 };
@@ -918,4 +996,4 @@ i18n
     },
   });
 
-export default i18n; 
+export default i18n;

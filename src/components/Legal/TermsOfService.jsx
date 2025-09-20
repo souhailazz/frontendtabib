@@ -18,7 +18,7 @@ const TermsOfService = () => {
         keywords="conditions générales d'utilisation, CGU, conditions d'utilisation, mentions légales, conditions de service"
         ogTitle={`${pageTitle} | Tabib Life`}
         ogDescription={pageDescription}
-        ogImage="https://tabib.life/logo.png"
+        ogImage="https://tabib.life/logo.webp"
         ogUrl="https://tabib.life/terms-of-service"
       />
       

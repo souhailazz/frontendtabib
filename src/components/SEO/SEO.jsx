@@ -6,10 +6,10 @@ export const SEO = ({
   description = 'Plateforme de prise de rendez-vous médicaux en ligne au Maroc', 
   path = '/',
   type = 'website',
-  image = '/logo.png',
+  image = '/logo.webp',
   noIndex = false
 }) => {
-  const siteUrl = 'https://www.tabiblife.com';
+  const siteUrl = 'https://tabib.life';
   const fullUrl = `${siteUrl}${path}`;
   const imageUrl = `${siteUrl}${image}`;
 
@@ -19,12 +19,24 @@ export const SEO = ({
     "@type": "Organization",
     "name": "Tabib Life",
     "url": siteUrl,
-    "logo": `${siteUrl}/logo.png`,
+    "logo": `${siteUrl}/logo.webp`,
     "sameAs": [
       "https://facebook.com/tabiblife",
       "https://instagram.com/tabiblife",
       "https://linkedin.com/company/tabiblife"
-    ]
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+212 563308663",
+      "contactType": "customer service",
+      "areaServed": "MA",
+      "availableLanguage": ["French", "Arabic"]
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Casablanca",
+      "addressCountry": "Morocco"
+    }
   };
 
   // Breadcrumb Schema
@@ -56,9 +68,47 @@ export const SEO = ({
     "url": fullUrl,
     "publisher": {
       "@type": "Organization",
-      "name": "Tabib Life"
+      "name": "Tabib Life",
+      "logo": `${siteUrl}/logo.webp`
     },
-    "inLanguage": "fr"
+    "inLanguage": "fr",
+    "datePublished": "2023-01-01T00:00:00Z",
+    "dateModified": new Date().toISOString()
+  };
+
+  // LocalBusiness Schema (for healthcare service)
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "Tabib Life",
+    "image": `${siteUrl}/logo.webp`,
+    "url": siteUrl,
+    "telephone": "+212 563308663",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Casablanca",
+      "addressCountry": "Morocco"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "33.5731",
+      "longitude": "-7.5898"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "00:00",
+      "closes": "23:59"
+    },
+    "priceRange": "$$$"
   };
 
   return (
@@ -97,6 +147,9 @@ export const SEO = ({
       </script>
       <script type="application/ld+json">
         {JSON.stringify(webpageSchema)}
+      </script>
+      <script type="application/ld+json">
+        {JSON.stringify(localBusinessSchema)}
       </script>
     </Helmet>
   );

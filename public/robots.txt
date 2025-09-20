@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /login
+Disallow: /signup
+Disallow: /admin
+Disallow: /dashboard
 
-Sitemap: https://www.tabib.life/sitemap.xml
+# Crawl-delay: 10
+
+Sitemap: https://tabib.life/sitemap.xml

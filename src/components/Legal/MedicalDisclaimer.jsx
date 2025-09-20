@@ -16,7 +16,7 @@ const MedicalDisclaimer = () => {
         keywords="avertissement médical, mise en garde médicale, non-responsabilité médicale, informations médicales, plateforme de santé"
         ogTitle={`${pageTitle} | Tabib Life`}
         ogDescription={pageDescription}
-        ogImage="https://tabib.life/logo.png"
+        ogImage="https://tabib.life/logo.webp"
         ogUrl="https://tabib.life/medical-disclaimer"
       />
       

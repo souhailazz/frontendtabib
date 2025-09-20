@@ -1,6 +1,8 @@
-<svg width="60" height="60" viewBox="10 5 40 50" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#FFFFFF" stroke-width="2">
-  <circle cx="25" cy="30" r="10"/>
-  <path d="M25 20 v-8"/>
-  <path d="M19 12 h12"/>
-  <path d="M25 40 q0 10 10 10"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Tabib Life Logo</title>
+  <circle cx="64" cy="64" r="60" fill="#4285F4" />
+  <text x="64" y="72" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="bold">
+    Tabib
+  </text>
 </svg>

@@ -92,6 +92,19 @@
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
   }
   
+  /* Error styling */
+  .form-input.error,
+  .form-select.error {
+    border-color: #dc3545;
+    background: #fff5f5;
+  }
+  
+  .form-input.error:focus,
+  .form-select.error:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
+  }
+  
   /* Password input with toggle */
   .password-input-wrapper {
     position: relative;
@@ -242,4 +255,181 @@
   
   .hospital-select::-webkit-scrollbar-thumb:hover {
     background: #999;
+  }
+  
+  /* Step indicator styles */
+  .step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  
+  .step-indicator::before {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e0e0e0;
+    z-index: 1;
+  }
+  
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    flex: 1;
+  }
+  
+  .step-number {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .step-label {
+    font-size: 0.7rem;
+    color: #666;
+    text-align: center;
+    max-width: 100px;
+  }
+  
+  .step.active .step-number {
+    background: #4caf50;
+    color: white;
+  }
+  
+  .step.completed .step-number {
+    background: #4caf50;
+    color: white;
+  }
+  
+  .step.active .step-label {
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .step.completed .step-label {
+    color: #333;
+  }
+  
+  /* Navigation buttons */
+  .form-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+  
+  .nav-btn {
+    padding: 0.6rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  .nav-btn:hover {
+    background: #e9ecef;
+  }
+  
+  .nav-btn.next-btn {
+    background: #4caf50;
+    color: white;
+    border-color: #4caf50;
+  }
+  
+  .nav-btn.next-btn:hover {
+    background: #45a049;
+  }
+  
+  .step-content {
+    min-height: 200px;
+  }
+  
+  /* CAPTCHA styles */
+  .captcha-container {
+    margin-top: 1rem;
+  }
+  
+  .captcha-challenge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .captcha-question {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .captcha-refresh {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .captcha-refresh:hover {
+    background: #f8f9fa;
+  }
+  
+  .captcha-input-container {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .captcha-input {
+    flex: 1;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.85rem;
+  }
+  
+  .captcha-input.verified {
+    border-color: #28a745;
+    background-color: #f8fff9;
+  }
+  
+  .captcha-verify-btn {
+    padding: 0.4rem 0.8rem;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  
+  .captcha-verify-btn:hover {
+    background: #45a049;
+  }
+  
+  .captcha-success {
+    color: #28a745;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background: #f8fff9;
+    border-radius: 4px;
   }

@@ -1,8 +1,10 @@
-const CACHE_NAME = 'tabib-life-v1';
+const CACHE_NAME = 'tabib-life-v4'; // Updated cache name to force refresh
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
-  '/assets/logo.svg',
+  '/logo.webp',
+  '/logo.svg',
+  '/bimi-logo.svg',
   '/assets/index.css',
   'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap',
   'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'

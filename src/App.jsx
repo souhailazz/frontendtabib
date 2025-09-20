@@ -22,7 +22,7 @@ import MedicalDisclaimer from './components/Legal/MedicalDisclaimer';
 import { getOptimalImageSource } from './utils/imageUtils';
 import heroBgWebP from './assets/healthcare-hero-bg.webp';
 import heroBgPNG from './assets/healthcare-hero-bg.png';
-
+import About from './components/About/About';
 // Home component
 const Home = () => {
   const { t } = useTranslation();
@@ -33,14 +33,13 @@ const Home = () => {
     
     const loadImage = async () => {
       try {
-        const imgSrc = await getOptimalImageSource(heroBgWebP, heroBgPNG);
+        // Simplified image loading without WebP detection for now
+        // We'll use the imported images directly
         if (isMounted) {
-          const img = new Image();
-          img.onload = () => setBgImage(imgSrc);
-          img.src = imgSrc;
+          setBgImage(heroBgWebP); // Use WebP directly
         }
       } catch (error) {
-        console.error('Error loading image:', error);
+        console.error('Error in image loading logic:', error);
         if (isMounted) setBgImage(heroBgPNG); // Fallback to PNG on error
       }
     };
@@ -57,7 +56,9 @@ const Home = () => {
       <div 
         className="hero-section"
         style={{
-          backgroundImage: `linear-gradient(rgba(15, 76, 117, 0.3), rgba(15, 76, 117, 0.5))${bgImage ? `, url(${bgImage})` : ''}`,
+          backgroundImage: bgImage 
+            ? `linear-gradient(rgba(15, 76, 117, 0.3), rgba(15, 76, 117, 0.5)), url(${bgImage})`
+            : 'linear-gradient(rgba(15, 76, 117, 0.3), rgba(15, 76, 117, 0.5))'
         }}
       >
         <div className="hero-content">
@@ -188,59 +189,6 @@ const Home = () => {
   );
 };
 
-// About component
-const About = () => {
-  const { t } = useTranslation();
-  
-  return (
-    <>
-      <PageMeta 
-        title="À propos de Tabib Life"
-        description="Découvrez Tabib Life, la plateforme de prise de rendez-vous médicaux en ligne au Maroc. Notre mission, nos valeurs et notre engagement envers la santé digitale."
-        keywords="à propos tabib life, mission tabib maroc, valeurs tabib life, santé digitale maroc, plateforme médicale maroc"
-        ogTitle="À propos de Tabib Life - Votre santé, notre priorité"
-        ogDescription="Découvrez comment Tabib Life révolutionne la prise de rendez-vous médicaux au Maroc avec une plateforme simple, sécurisée et efficace."
-        ogImage="https://tabib.life/logo.png"
-        ogUrl="https://tabib.life/about"
-      />
-      <div className="about-container">
-        <h1>{t('about.title')}</h1>
-        <p>{t('about.description1')}</p>
-        <p>{t('about.description2')}</p>
-        
-        <div className="about-mission">
-          <h2>{t('about.mission.title')}</h2>
-          <p>{t('about.mission.description')}</p>
-        </div>
-
-        <div className="about-values">
-          <h2>{t('about.values.title')}</h2>
-          <div className="values-grid">
-            <div className="value-item">
-              <h3><FaUserShield /> {t('about.values.accessibility.title')}</h3>
-              <p>{t('about.values.accessibility.description')}</p>
-            </div>
-            <div className="value-item">
-              <h3><FaLock /> {t('about.values.trust.title')}</h3>
-              <p>{t('about.values.trust.description')}</p>
-            </div>
-            <div className="value-item">
-              <h3><FaRocket /> {t('about.values.innovation.title')}</h3>
-              <p>{t('about.values.innovation.description')}</p>
-            </div>
-            <div className="value-item">
-              <h3><FaHandsHelping /> {t('about.values.support.title')}</h3>
-              <p>{t('about.values.support.description')}</p>
-            </div>
-          </div>
-        </div>
-
-        <Link to="/" className="back-link">{t('about.backLink')}</Link>
-      </div>
-    </>
-  );
-};
-
 // NotFound component
 const NotFound = () => {
   const { t } = useTranslation();
@@ -296,11 +244,15 @@ const AppContent = () => {
       <header className="app-header">
         <div className="logo-container">
           <Link to="/" className="logo-link">
-          <img 
-  src="/logo.png" 
-  alt="Tabib.life logo" 
-  className="logo"
-/>
+          <picture>
+            <source srcSet="/logo.webp" type="image/webp" />
+            <source srcSet="/logo.svg" type="image/svg+xml" />
+            <img 
+              src="/logo.svg" 
+              alt="Tabib.life logo" 
+              className="logo"
+            />
+          </picture>
           </Link>
         </div>
         {/* Hamburger menu for mobile */}
