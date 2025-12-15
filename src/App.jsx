@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import MedicalChatbot from './components/MedicalChatbot/MedicalChatbot';
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './App.css';
 import './i18n';
-import { FaSearch, FaBolt, FaHospitalAlt, FaMobileAlt, FaHeartbeat, FaBone, FaBrain, FaBaby, FaEye, FaTooth, FaFacebook, FaInstagram, FaLinkedin, FaMapMarkerAlt, FaEnvelope, FaPhone, FaClock, FaUserMd, FaCity, FaUserPlus, FaInfoCircle, FaSignInAlt, FaSignOutAlt, FaUserShield, FaRocket, FaHandsHelping, FaLock, FaFileMedical, FaGavel, FaBars, FaTimes, FaUser, FaChevronDown } from 'react-icons/fa';
+import { FaSearch, FaBolt, FaHospitalAlt, FaMobileAlt, FaHeartbeat, FaBone, FaBrain, FaBaby, FaEye, FaTooth, FaFacebook, FaInstagram, FaLinkedin, FaMapMarkerAlt, FaEnvelope, FaPhone, FaClock, FaUserMd, FaCity, FaUserPlus, FaInfoCircle, FaSignInAlt, FaSignOutAlt, FaUserShield, FaRocket, FaHandsHelping, FaLock, FaFileMedical, FaGavel, FaBars, FaTimes, FaUser, FaChevronDown, FaCommentMedical } from 'react-icons/fa';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Profiles from './components/Profiles/Profiles';
 import HealthcareSearch from './components/Search/healthcare-search';
@@ -209,6 +210,7 @@ const AppContent = () => {
   const location = useLocation();
   const [navOpen, setNavOpen] = useState(false); // Add state for mobile nav
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false); // Add state for profile dropdown
+  const [chatbotOpen, setChatbotOpen] = useState(false); // State for medical chatbot
 
   const handleLogout = () => {
     logout();
@@ -407,6 +409,24 @@ const AppContent = () => {
             </div>
           </div>
         </footer>
+      )}
+
+      {/* Medical Chatbot */}
+      <MedicalChatbot 
+        isOpen={chatbotOpen} 
+        onClose={() => setChatbotOpen(false)} 
+      />
+      
+      {/* Floating Chat Button */}
+      {!chatbotOpen && (
+        <button 
+          className="mc-floating-btn"
+          onClick={() => setChatbotOpen(true)}
+          aria-label="Open Medical Assistant"
+        >
+          <FaCommentMedical />
+          <span className="mc-floating-btn-pulse"></span>
+        </button>
       )}
     </div>
   );
