@@ -304,7 +304,7 @@ const AnalyzingAnimation = ({ t }) => (
 const Message = ({ message, onFindHospitals, t, isNew }) => {
   const isUser = message.role === 'user';
   const shouldAnimate = isNew && !isUser && message.content;
-  const { displayedText, isTyping } = useTypewriter(message.content, 8, shouldAnimate);
+  const { displayedText, isTyping } = useTypewriter(message.content, 8, false);
   
   const textToShow = shouldAnimate ? displayedText : message.content;
   
